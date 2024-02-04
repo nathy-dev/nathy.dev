@@ -16,6 +16,16 @@ export default {
       ash: {
         500: '#b4bcae',
       },
+      forest: {
+        100: '#AFB38C',
+        300: '#606c38',
+        700: '#283618',
+      },
+      wood: {
+        100: '#fefae0',
+        500: '#dda15e',
+        900: '#bc6c25',
+      },
     },
   },
   plugins: [],

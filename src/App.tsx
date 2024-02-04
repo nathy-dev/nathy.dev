@@ -1,3 +1,5 @@
+import '@fontsource/vt323';
+
 function App() {
   return (
     <>
