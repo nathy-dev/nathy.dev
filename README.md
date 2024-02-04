@@ -1,7 +1,7 @@
 # nathy.dev
 
-A small react app to tell people about me
+a little site for people to learn about nathy (me)
 
 ### Tools used
 
-React, vite, tailwind,
+react, vite, tailwind
