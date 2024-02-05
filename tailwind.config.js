@@ -4,29 +4,24 @@ export default {
   theme: {
     extend: {},
     colors: {
-      ghoul: {
-        100: '#b492d3',
-        300: '#9e7ac0',
-        500: '#8862ac',
-        700: '#6a4b86',
-        900: '#4b3460',
-      },
-      licorice: '#0a0312',
-      lilac: '#be7bf9',
-      ash: {
-        500: '#b4bcae',
-      },
       forest: {
-        100: '#AFB38C',
+        100: '#afb38c',
         300: '#606c38',
+        500: '#445128',
         700: '#283618',
+        900: '#1c2711',
       },
       wood: {
         100: '#fefae0',
+        300: '#eece9f',
         500: '#dda15e',
+        700: '#cd8742',
         900: '#bc6c25',
       },
+      tangerine: '#f78811',
+      background: 'rgb(var(--background) / <alpha-value>)',
     },
   },
+  darkMode: 'class',
   plugins: [],
 };

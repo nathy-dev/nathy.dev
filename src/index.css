@@ -3,8 +3,21 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --background: 254 250 224;
+  }
+
+  .dark {
+    --background: 28 39 17;
+  }
+}
+
+@layer base {
   html {
-    @apply bg-wood-100;
     font-family: 'VT323', sans-serif;
+  }
+
+  body {
+    @apply bg-background;
   }
 }
