@@ -5,10 +5,12 @@
 @layer base {
   :root {
     --background: 254 250 224;
+    --text: 14 20 9;
   }
 
   .dark {
-    --background: 28 39 17;
+    --background: 14 20 9;
+    --text: 254 250 224;
   }
 }
 
