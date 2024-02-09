@@ -1,46 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { PixelBox } from './PixelBox.tsx';
+import { Theme } from '../types.ts';
+import { Icons } from './Icon/index.tsx';
 
-type Theme = 'light' | 'dark' | 'system';
+export type ThemeTogglerProps = {
+  theme: Theme;
+  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+};
 
-export const ThemeToggler = () => {
-  const [theme, setTheme] = useState<Theme>();
+export const ThemeToggler = ({ theme, setTheme }: ThemeTogglerProps) => {
   const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    switch (localStorage.theme) {
-      case 'dark':
-        setTheme('dark');
-        document.documentElement.classList.add('dark');
-        break;
-      case 'light':
-        setTheme('light');
-        document.documentElement.classList.remove('dark');
-        break;
-      default:
-        setTheme('system');
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-    }
-  }, [theme]);
 
   const handleModalClick = () => {
     setShowModal((prev) => !prev);
   };
 
-  const handleThemeClick = (theme: Theme) => {
+  const handleThemeClick = (theme: 'light' | 'dark' | 'system') => {
     localStorage.setItem('theme', theme);
-    setTheme(theme);
+    setTheme({
+      display: theme === 'system' ? 'dark' : theme,
+      selected: theme,
+    });
     handleModalClick();
   };
 
   return (
     <div>
       <button onClick={handleModalClick}>
-        {theme === 'dark' ? <div>🌝</div> : theme === 'light' ? <div>🌞</div> : <div>💻</div>}
+        {<img src={theme.display && theme.selected && Icons[theme.display][theme.selected]} alt={theme.selected} />}
       </button>
       {showModal && (
         <div className="z-50 relative">
@@ -52,10 +39,10 @@ export const ThemeToggler = () => {
                 }}
               >
                 <div className="flex flex-row gap-2">
-                  <div>🌝</div>
+                  <img src={theme.display && Icons[theme.display].dark} alt="dark mode" />
                   <span
                     className={`${
-                      theme === 'dark' ? 'underline' : ''
+                      theme.selected === 'dark' ? 'underline' : ''
                     } decoration-tangerine hover:decoration-text hover:underline`}
                   >
                     Dark
@@ -68,10 +55,10 @@ export const ThemeToggler = () => {
                 }}
               >
                 <div className="flex flex-row gap-2">
-                  <div>🌞</div>
+                  <img src={theme.display && Icons[theme.display].light} alt="light mode" />
                   <span
                     className={`${
-                      theme === 'light' ? 'underline' : ''
+                      theme.selected === 'light' ? 'underline' : ''
                     } decoration-tangerine hover:decoration-text hover:underline`}
                   >
                     Light
@@ -84,10 +71,10 @@ export const ThemeToggler = () => {
                 }}
               >
                 <div className="flex flex-row gap-2">
-                  <div>💻</div>
+                  <img src={theme.display && Icons[theme.display].system} alt="system set" />
                   <span
                     className={`${
-                      theme === 'system' ? 'underline' : ''
+                      theme.selected === 'system' ? 'underline' : ''
                     } decoration-tangerine hover:decoration-text hover:underline`}
                   >
                     System
