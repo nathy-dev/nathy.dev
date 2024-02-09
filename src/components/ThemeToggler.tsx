@@ -27,19 +27,30 @@ export const ThemeToggler = ({ theme, setTheme }: ThemeTogglerProps) => {
   return (
     <div>
       <button onClick={handleModalClick}>
-        {<img src={theme.display && theme.selected && Icons[theme.display][theme.selected]} alt={theme.selected} />}
+        {
+          <img
+            src={theme.display && theme.selected && Icons[theme.display][theme.selected]}
+            alt={theme.selected}
+            className="h-6 w-6 object-cover"
+          />
+        }
       </button>
       {showModal && (
         <div className="z-50 relative">
-          <div className="absolute  bg-background mt-2 p-2 right-0">
+          <div className="absolute  bg-background mt-4 right-0">
             <PixelBox>
               <button
                 onClick={() => {
                   handleThemeClick('dark');
                 }}
+                className="w-max"
               >
-                <div className="flex flex-row gap-2">
-                  <img src={theme.display && Icons[theme.display].dark} alt="dark mode" />
+                <div className="flex flex-row gap-2 justify-start items-center">
+                  <img
+                    src={theme.display && Icons[theme.display].dark}
+                    alt="dark mode"
+                    className="h-5 w-5 object-cover"
+                  />
                   <span
                     className={`${
                       theme.selected === 'dark' ? 'underline' : ''
@@ -53,9 +64,14 @@ export const ThemeToggler = ({ theme, setTheme }: ThemeTogglerProps) => {
                 onClick={() => {
                   handleThemeClick('light');
                 }}
+                className="w-max"
               >
-                <div className="flex flex-row gap-2">
-                  <img src={theme.display && Icons[theme.display].light} alt="light mode" />
+                <div className="flex flex-row gap-2 justify-start items-center">
+                  <img
+                    src={theme.display && Icons[theme.display].light}
+                    alt="light mode"
+                    className="h-5 w-5 object-cover"
+                  />
                   <span
                     className={`${
                       theme.selected === 'light' ? 'underline' : ''
@@ -69,9 +85,14 @@ export const ThemeToggler = ({ theme, setTheme }: ThemeTogglerProps) => {
                 onClick={() => {
                   handleThemeClick('system');
                 }}
+                className="w-max"
               >
-                <div className="flex flex-row gap-2">
-                  <img src={theme.display && Icons[theme.display].system} alt="system set" />
+                <div className="flex flex-row gap-2 justify-start items-center">
+                  <img
+                    src={theme.display && Icons[theme.display].system}
+                    alt="system set"
+                    className="h-5 w-5 object-cover"
+                  />
                   <span
                     className={`${
                       theme.selected === 'system' ? 'underline' : ''
