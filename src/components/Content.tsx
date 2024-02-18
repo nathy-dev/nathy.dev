@@ -1,7 +1,7 @@
 import { Choice } from './Choice.tsx';
 import { PixelBox } from './PixelBox.tsx';
 
-export const Content = ({ theme }: { theme: 'light' | 'dark' | undefined }) => {
+export const Content = () => {
   return (
     <div className="flex flex-row justify-center text-lg sm:text-xl">
       <PixelBox>
@@ -13,14 +13,10 @@ export const Content = ({ theme }: { theme: 'light' | 'dark' | undefined }) => {
             <h3>To continue, choose your adventure:</h3>
             <div className="flex flex-col xs:flex-row justify-center items-center xs:items-start gap-2 xs:gap-8 sm:gap-14">
               <div className="h-max">
-                <Choice icon="fight" theme={theme}>
-                  Fight for it
-                </Choice>
+                <Choice icon="fight">Fight for it</Choice>
               </div>
               <div className="">
-                <Choice icon="floppy" theme={theme}>
-                  Open pdf
-                </Choice>
+                <Choice icon="floppy">Open pdf</Choice>
               </div>
             </div>
           </div>

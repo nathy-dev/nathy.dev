@@ -1,12 +1,13 @@
+import { useThemeContext } from '../context/useThemeContext.tsx';
 import { Icons } from './Icon/index.tsx';
 
 type ChoiceProps = {
   children: string;
   icon: 'fight' | 'floppy';
-  theme: 'light' | 'dark' | undefined;
 };
 
-export const Choice = ({ children, icon, theme }: ChoiceProps) => {
+export const Choice = ({ children, icon }: ChoiceProps) => {
+  const { displayTheme: theme } = useThemeContext();
   return (
     <button className="border-2 border-background hover:border-text box-border">
       <div className="flex flex-col justify-center items-center w-32">

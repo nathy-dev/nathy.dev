@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import { PixelBox } from './PixelBox.tsx';
-import { Theme } from '../types.ts';
 import { Icons } from './Icon/index.tsx';
+import { useThemeContext } from '../context/useThemeContext.tsx';
 
-export type ThemeTogglerProps = {
-  theme: Theme;
-  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
-};
-
-export const ThemeToggler = ({ theme, setTheme }: ThemeTogglerProps) => {
+export const ThemeToggler = () => {
   const [showModal, setShowModal] = useState(false);
+
+  const { displayTheme, selectedTheme, setTheme } = useThemeContext();
 
   const handleModalClick = () => {
     setShowModal((prev) => !prev);
@@ -17,8 +14,18 @@ export const ThemeToggler = ({ theme, setTheme }: ThemeTogglerProps) => {
 
   const handleThemeClick = (theme: 'light' | 'dark' | 'system') => {
     localStorage.setItem('theme', theme);
+
+    const currTheme =
+      theme === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme;
+
+    if (currTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
     setTheme({
-      display: theme === 'system' ? 'dark' : theme,
+      display: currTheme,
       selected: theme,
     });
     handleModalClick();
@@ -29,8 +36,8 @@ export const ThemeToggler = ({ theme, setTheme }: ThemeTogglerProps) => {
       <button onClick={handleModalClick}>
         {
           <img
-            src={theme.display && theme.selected && Icons[theme.display][theme.selected]}
-            alt={theme.selected}
+            src={displayTheme && selectedTheme && Icons[displayTheme][selectedTheme]}
+            alt={selectedTheme}
             className="h-6 w-6 object-cover"
           />
         }
@@ -47,13 +54,13 @@ export const ThemeToggler = ({ theme, setTheme }: ThemeTogglerProps) => {
               >
                 <div className="flex flex-row gap-2 justify-start items-center">
                   <img
-                    src={theme.display && Icons[theme.display].dark}
+                    src={displayTheme && Icons[displayTheme].dark}
                     alt="dark mode"
                     className="h-5 w-5 object-cover"
                   />
                   <span
                     className={`${
-                      theme.selected === 'dark' ? 'underline' : ''
+                      selectedTheme === 'dark' ? 'underline' : ''
                     } decoration-tangerine hover:decoration-text hover:underline`}
                   >
                     Dark
@@ -68,13 +75,13 @@ export const ThemeToggler = ({ theme, setTheme }: ThemeTogglerProps) => {
               >
                 <div className="flex flex-row gap-2 justify-start items-center">
                   <img
-                    src={theme.display && Icons[theme.display].light}
+                    src={displayTheme && Icons[displayTheme].light}
                     alt="light mode"
                     className="h-5 w-5 object-cover"
                   />
                   <span
                     className={`${
-                      theme.selected === 'light' ? 'underline' : ''
+                      selectedTheme === 'light' ? 'underline' : ''
                     } decoration-tangerine hover:decoration-text hover:underline`}
                   >
                     Light
@@ -89,13 +96,13 @@ export const ThemeToggler = ({ theme, setTheme }: ThemeTogglerProps) => {
               >
                 <div className="flex flex-row gap-2 justify-start items-center">
                   <img
-                    src={theme.display && Icons[theme.display].system}
+                    src={displayTheme && Icons[displayTheme].system}
                     alt="system set"
                     className="h-5 w-5 object-cover"
                   />
                   <span
                     className={`${
-                      theme.selected === 'system' ? 'underline' : ''
+                      selectedTheme === 'system' ? 'underline' : ''
                     } decoration-tangerine hover:decoration-text hover:underline`}
                   >
                     System

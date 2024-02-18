@@ -2,12 +2,18 @@ import '@fontsource/vt323';
 import { TopBar } from './components/TopBar.tsx';
 import { Content } from './components/Content.tsx';
 import { useEffect, useState } from 'react';
-import { Theme } from './types.ts';
+import { Theme, ThemeContext } from './context/ThemeContext.tsx';
 
 function App() {
-  const [theme, setTheme] = useState<Theme>({ display: undefined, selected: 'system' });
+  const [theme, setTheme] = useState<Theme>({
+    display: undefined,
+    selected: 'system',
+  });
+
+  const [blockRender, setBlockRender] = useState(true);
 
   useEffect(() => {
+    if (theme.display) return;
     switch (localStorage.theme) {
       case 'dark':
         setTheme({ display: 'dark', selected: 'dark' });
@@ -26,13 +32,22 @@ function App() {
           document.documentElement.classList.remove('dark');
         }
     }
-  }, [theme]);
+    setBlockRender(false);
+    // Intentionally only triggering on initial render
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <div className="min-h-screen w-full text-text">
-      <TopBar theme={theme} setTheme={setTheme} />
-      <Content theme={theme.display} />
-    </div>
+    <ThemeContext.Provider value={{ ...theme, setTheme }}>
+      <div className="min-h-screen w-full text-text">
+        {!blockRender && (
+          <>
+            <TopBar />
+            <Content />
+          </>
+        )}
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
