@@ -9,10 +9,10 @@ type ChoiceProps = {
 export const Choice = ({ children, icon }: ChoiceProps) => {
   const { displayTheme: theme } = useThemeContext();
   return (
-    <button className="border-2 border-background hover:border-text box-border">
+    <button className="hover:animate-bounce pt-6">
       <div className="flex flex-col justify-center items-center w-32">
-        <div className="p-2">{theme && <img src={Icons[theme][icon]} alt={icon} />}</div>
         <p>{children}</p>
+        <div className="p-2">{theme && <img src={Icons[theme][icon]} alt={icon} />}</div>
       </div>
     </button>
   );
