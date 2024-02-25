@@ -63,7 +63,7 @@ export const ThemeToggler = () => {
                       selectedTheme === 'dark' ? 'underline' : ''
                     } decoration-tangerine hover:decoration-text hover:underline`}
                   >
-                    Dark
+                    dark
                   </span>
                 </div>
               </button>
@@ -84,7 +84,7 @@ export const ThemeToggler = () => {
                       selectedTheme === 'light' ? 'underline' : ''
                     } decoration-tangerine hover:decoration-text hover:underline`}
                   >
-                    Light
+                    light
                   </span>
                 </div>
               </button>
@@ -105,7 +105,7 @@ export const ThemeToggler = () => {
                       selectedTheme === 'system' ? 'underline' : ''
                     } decoration-tangerine hover:decoration-text hover:underline`}
                   >
-                    System
+                    system
                   </span>
                 </div>
               </button>

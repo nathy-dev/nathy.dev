@@ -5,7 +5,11 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        128: '32rem',
+      },
+    },
     colors: {
       tangerine: '#f78811',
       background: 'rgb(var(--background) / <alpha-value>)',

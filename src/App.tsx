@@ -3,8 +3,7 @@ import { TopBar } from './components/TopBar.tsx';
 import { Content } from './components/Content.tsx';
 import { useEffect, useState } from 'react';
 import { Theme, ThemeContext } from './context/ThemeContext.tsx';
-import { Canvas } from '@react-three/fiber';
-import { Gameboy } from './components/Gameboy.tsx';
+import { GameboyWrapper } from './components/GameboyWrapper.tsx';
 
 function App() {
   const [theme, setTheme] = useState<Theme>({
@@ -45,15 +44,9 @@ function App() {
         {!blockRender && (
           <>
             <TopBar />
-            <div className="h-screen w-full relative">
-              <div className="z-0 h-3/4 w-3/4 absolute right-96">
-                <Canvas>
-                  <Gameboy />
-                </Canvas>
-              </div>
-              <div className="z-10 h-96 w-96 absolute left-96 right-0 top-0 bottom-0 bg-transparent m-auto">
-                <Content />
-              </div>
+            <div className="h-full w-full max-w-[1400px] relative m-auto">
+              <GameboyWrapper />
+              <Content />
             </div>
           </>
         )}
