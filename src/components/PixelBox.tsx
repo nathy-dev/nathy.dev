@@ -5,8 +5,8 @@ type PixelBoxProps = {
 
 export const PixelBox = ({ children, variant }: PixelBoxProps) => {
   return variant === 'button' ? (
-    <div className="border-transparent group-hover:border-tangerine border-t-4 border-b-4 w-10 md:w-16">
-      <div className="border-transparent group-hover:border-tangerine border-r-4 border-l-4 -mx-1 bg-opacity-90 group-hover:bg-tangerine">
+    <div className="border-text border-t-4 border-b-4 w-10 md:w-16">
+      <div className="border-text border-r-4 border-l-4 -mx-1 bg-opacity-90 group-hover:bg-tangerine">
         <div>{children}</div>
       </div>
     </div>
