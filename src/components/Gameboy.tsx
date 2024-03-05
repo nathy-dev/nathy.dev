@@ -9,7 +9,7 @@ export const Gameboy = (props: JSX.IntrinsicElements['group']) => {
   const gameBoyRef = useRef<Group>(null!);
 
   useFrame(() => {
-    gameBoyRef.current.rotation.y += 0.01;
+    gameBoyRef.current.rotation.y += 0.005;
   });
 
   return (
