@@ -4,6 +4,7 @@ import { Content } from './components/Content.tsx';
 import { useEffect, useState } from 'react';
 import { Theme, ThemeContext } from './context/ThemeContext.tsx';
 import { GameboyWrapper } from './components/GameboyWrapper.tsx';
+import { Game } from './Game/index.tsx';
 
 function App() {
   const [theme, setTheme] = useState<Theme>({
@@ -41,7 +42,8 @@ function App() {
   return (
     <ThemeContext.Provider value={{ ...theme, setTheme }}>
       <div className="h-screen w-full text-text">
-        {!blockRender && (
+        <Game></Game>
+        {/* {!blockRender && (
           <>
             <TopBar />
             <div className="h-full w-full max-w-[1400px] relative m-auto">
@@ -49,7 +51,7 @@ function App() {
               <Content />
             </div>
           </>
-        )}
+        )} */}
       </div>
     </ThemeContext.Provider>
   );
