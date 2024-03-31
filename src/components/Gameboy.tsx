@@ -10,6 +10,7 @@ export const Gameboy = (props: JSX.IntrinsicElements['group']) => {
 
   useFrame(() => {
     gameBoyRef.current.rotation.y += 0.005;
+    gameBoyRef.current.position;
   });
 
   return (
