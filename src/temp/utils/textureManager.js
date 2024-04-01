@@ -7,8 +7,9 @@ import {
 } from 'three';
 import GifLoader from 'three-gif-loader';
 
-import wallImg from '../images/wall.jpg';
-import coinImg from '../images/coin.gif';
+import wallImg from '../images/wall.png';
+import floorImg from '../images/floor.png';
+import coinImg from '../images/shard.png';
 import barrelImg from '../images/barrel.png';
 import orbImg from '../images/orb.gif';
 import enemyImg from '../images/enemy.gif';
@@ -37,10 +38,12 @@ export function imgLoader(path, type) {
 }
 
 const wall = imgLoader(wallImg);
-const coin = imgLoader(coinImg, 'gif');
+const shard = imgLoader(coinImg);
 const barrel = imgLoader(barrelImg);
 const orb = imgLoader(orbImg, 'gif');
 const enemy = imgLoader(enemyImg, 'gif');
 const deadEnemyStatic = imgLoader(deadEnemyStaticImg);
 
-export { wall, coin, barrel, orb, enemy, deadEnemyStatic };
+export const floor = imgLoader(floorImg);
+
+export { wall, shard as coin, barrel, orb, enemy, deadEnemyStatic };

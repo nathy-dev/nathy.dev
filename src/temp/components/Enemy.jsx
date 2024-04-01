@@ -4,7 +4,7 @@ import throttle from '../utils/throttle.ts';
 import { MeshStandardMaterial, Vector3 } from 'three';
 
 import { deadEnemyStaticMaterial, enemyGeometry, enemyMaterial } from '../shared-geometries/enemy';
-import Bullet from './Bullet.jsx';
+import { Bullet } from './Bullet.jsx';
 import { calcDistance, closestObject } from '../utils/calcDistance';
 import limitNumberWithinRange from '../utils/limitNumberWithinRange';
 import calcLine from '../utils/calcLine';
@@ -30,7 +30,7 @@ const direction = new Vector3();
 // TODO: Consider to use Web Workers
 // TODO: Split logic into smaller files
 
-const Enemy = ({ position, mapData, setCurrentMap }) => {
+const Enemy = ({ position }) => {
   const [bullets, setBullets] = useState([]);
 
   const sound = new Audio(enemyDeathSound);
@@ -49,21 +49,12 @@ const Enemy = ({ position, mapData, setCurrentMap }) => {
       const enemyPosition = ref.current?.position;
       const playerPosition = scene.children[1].position;
 
-      ////////////////////////////
-      ///// Camera manager
-      ////////////////////////////
-
       ref.current.lookAt(camera.position.x, camera.position.y - 0.25, camera.position.z);
-
-      ////////////////////////////
-      ///// Bullet behaviour
-      ////////////////////////////
 
       const bulletCollisions = scene.children.filter((e) => {
         return calcDistance(e.position, enemyPosition) <= 0.8 && e.name === 'bullet';
       });
 
-      // if hit by a bullet
       if (bulletCollisions.length && isAlive) {
         const deadEnemy = imgLoader(deadEnemyImg, 'gif');
 
@@ -81,16 +72,7 @@ const Enemy = ({ position, mapData, setCurrentMap }) => {
         setTimeout(function () {
           setBaseMaterial(deadEnemyStaticMaterial);
         }, 1000);
-
-        // in case you want to remove it from the map
-        // let newMapData = [...mapData];
-        // newMapData[position[2]][position[0]] = "·";
-        // setCurrentMap(newMapData);
       }
-
-      ////////////////////////////
-      ///// Reacting to Player
-      ////////////////////////////
 
       const pointsBetweenEandP = calcLine(
         Math.floor(playerPosition.x),
@@ -137,10 +119,6 @@ const Enemy = ({ position, mapData, setCurrentMap }) => {
           ]);
         }
       }
-
-      ////////////////////////////
-      ///// Enemy collisions
-      ////////////////////////////
 
       const wallsCollisions = [
         ...scene.children[0].children,

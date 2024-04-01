@@ -2,16 +2,15 @@ import React, { useCallback, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import throttle from '../utils/throttle.ts';
 
-import { coin } from '../utils/textureManager';
+import { coin } from '../utils/textureManager.js';
 import coinSound from '../sounds/coin.wav';
-import { calcDistance } from '../utils/calcDistance';
+import { calcDistance } from '../utils/calcDistance.js';
 
-const Coin = ({ position, mapData, setCurrentMap }) => {
+const _Shard = ({ position, mapData, setCurrentMap }) => {
   const sound = new Audio(coinSound);
   const ref = useRef();
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const coinControl = useCallback(
+  const shardControl = useCallback(
     throttle(async (scene, camera) => {
       ref.current?.lookAt(camera.position);
 
@@ -35,7 +34,7 @@ const Coin = ({ position, mapData, setCurrentMap }) => {
     [],
   );
 
-  useFrame(({ scene, camera }) => coinControl(scene, camera));
+  useFrame(({ scene, camera }) => shardControl(scene, camera));
 
   console.log('Coin rendering...');
 
@@ -43,6 +42,8 @@ const Coin = ({ position, mapData, setCurrentMap }) => {
     <mesh position={position} ref={ref} name="coin" rotation={[-Math.PI / 2, 0, 0]}>
       <planeGeometry attach="geometry" />
       <meshStandardMaterial attach="material" transparent={true} map={coin} />
+      <ambientLight intensity={0.01} color={0xffdba1} castShadow={false} />
+      <pointLight intensity={0.5} color={0xffdba1} decay={1} castShadow={false} />
     </mesh>
   );
 };
@@ -51,4 +52,4 @@ const isSameType = (prevProps, nextProps) => {
   return prevProps.type === nextProps.type;
 };
 
-export default React.memo(Coin, isSameType);
+export const Shard = React.memo(_Shard, isSameType);

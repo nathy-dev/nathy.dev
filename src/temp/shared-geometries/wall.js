@@ -1,10 +1,15 @@
-import { BoxGeometry, MeshStandardMaterial } from "three";
-import { wall } from "../utils/textureManager";
+import { BoxGeometry, MeshStandardMaterial } from 'three';
+import { floor, wall } from '../utils/textureManager';
 
-const wallGeometry = new BoxGeometry(1, 1, 1);
+export const wallGeometry = new BoxGeometry(1, 1, 1);
 
-const wallMaterial = new MeshStandardMaterial({
+export const wallMaterial = new MeshStandardMaterial({
   map: wall,
 });
 
-export { wallGeometry, wallMaterial };
+export const floorGeometry = new BoxGeometry(1, 1, 1);
+
+export const floorMaterial = new MeshStandardMaterial({
+  map: floor,
+  // transparent: true,
+});

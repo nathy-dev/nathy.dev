@@ -6,10 +6,9 @@ import { Vector3 } from 'three';
 import { useAction } from '../store';
 import { FPVControls } from './FPVControls.jsx';
 import { useKeyboardControls } from '../hooks/useKeyboardControls';
-import Bullet from './Bullet.jsx';
+import { Bullet } from './Bullet.jsx';
 import { calcDistance, closestObject } from '../utils/calcDistance';
 import limitNumberWithinRange from '../utils/limitNumberWithinRange';
-import { PointerLockControls } from '@react-three/drei';
 
 const PLAYER_SPEED = 0.09;
 const PLAYER_BULLET_SPEED = 0.8;

@@ -4,7 +4,7 @@ import throttle from '../utils/throttle.ts';
 import { calcDistance } from '../utils/calcDistance';
 import fireSound from '../sounds/fire.mp3';
 
-const Bullet = ({ position, velocity, name, setBullets, collisionMarker }) => {
+const _Bullet = ({ position, velocity, name, setBullets, collisionMarker }) => {
   const sound = new Audio(fireSound);
   const ref = useRef();
 
@@ -12,9 +12,9 @@ const Bullet = ({ position, velocity, name, setBullets, collisionMarker }) => {
 
   useEffect(() => {
     sound.play();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const bulletControl = useCallback(
     throttle(async (scene) => {
       const position = ref.current?.position;
@@ -37,8 +37,6 @@ const Bullet = ({ position, velocity, name, setBullets, collisionMarker }) => {
 
   useFrame(({ scene }) => bulletControl(scene));
 
-  console.log('Bullet rendering...');
-
   return (
     <mesh ref={ref} position={position} name={name}>
       <sphereGeometry args={[0.05, 32, 32]} />
@@ -50,4 +48,4 @@ const isSamePosition = (prevProps, nextProps) => {
   return prevProps.position === nextProps.position;
 };
 
-export default React.memo(Bullet, isSamePosition);
+export const Bullet = React.memo(_Bullet, isSamePosition);
