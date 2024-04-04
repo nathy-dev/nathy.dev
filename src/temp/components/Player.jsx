@@ -1,21 +1,21 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import throttle from '../utils/throttle.ts';
+import throttle from '../util/throttle.ts';
 import { Vector3 } from 'three';
 
 import { useAction } from '../store';
 import { FPVControls } from './FPVControls.jsx';
 import { useKeyboardControls } from '../hooks/useKeyboardControls';
 import { Bullet } from './Bullet.jsx';
-import { calcDistance, closestObject } from '../utils/calcDistance';
-import limitNumberWithinRange from '../utils/limitNumberWithinRange';
+import { calcDistance, closestObject } from '../physics/calcDistance.ts';
+import { trimNumber } from '../util/trimNumber.ts';
 
 const PLAYER_SPEED = 0.09;
 const PLAYER_BULLET_SPEED = 0.8;
 const WORLD_COLLISION_MARGIN = 1.5;
 const TOP_LEFT_BOUNDARY = -9999;
 const BOTTOM_RIGHT_BOUNDARY = 9999;
-const POSITION_Y = 1;
+const Y_POSITION = 1;
 
 const cameraDirection = new Vector3();
 const playerDirection = new Vector3();
@@ -25,20 +25,21 @@ const sideVector = new Vector3();
 // TODO: Consider to use Web Workers
 // TODO: Split logic into smaller files
 
-const Player = () => {
+const _Player = () => {
   const { moveForward, moveBackward, moveLeft, moveRight, action } = useKeyboardControls();
 
   const [bullets, setBullets] = useState([]);
 
   const shoot = useAction((state) => state.shoot);
 
-  const player = useRef();
+  const playerRef = useRef();
+  const torchRef = useRef();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const playerControl = useCallback(
     throttle(async (camera, scene, moveForward, moveBackward, moveRight, moveLeft, action) => {
       // player position
-      const position = player.current.position;
+      const position = playerRef.current.position;
 
       ////////////////////////////
       ///// Player collisions
@@ -149,6 +150,14 @@ const Player = () => {
 
       const angleBottomRightLimit = Number(bottomRightCollisions[0]?.position.x - 1);
 
+      // const bulletCollisions = scene.children.filter((e) => {
+      //   return calcDistance(e.position, position) <= 0.8 && e.name === 'bullet';
+      // });
+
+      // if (bulletCollisions.length) {
+      //   console.log('player hit');
+      // }
+
       ////////////////////////////
       ///// Camera & direction manager
       ////////////////////////////
@@ -164,21 +173,19 @@ const Player = () => {
         .multiplyScalar(PLAYER_SPEED)
         .applyEuler(camera.rotation);
 
-      camera?.position.set(position.x, POSITION_Y, position.z);
+      camera?.position.set(position.x, Y_POSITION, position.z);
 
       ////////////////////////////
       ///// Player object position manager
       ////////////////////////////
-
-      player.current.position.set(
-        limitNumberWithinRange(
-          playerDirection.x + position.x,
-          angleTopLeftLimit || angleBottomLeftLimit || leftClosest,
-          angleTopRightLimit || angleBottomRightLimit || rightClosest,
-        ),
-        POSITION_Y,
-        limitNumberWithinRange(playerDirection.z + position.z, topClosest, bottomClosest),
+      const xPosition = trimNumber(
+        playerDirection.x + position.x,
+        angleTopLeftLimit || angleBottomLeftLimit || leftClosest,
+        angleTopRightLimit || angleBottomRightLimit || rightClosest,
       );
+      const zPosition = trimNumber(playerDirection.z + position.z, topClosest, bottomClosest);
+      playerRef.current.position.set(xPosition, Y_POSITION, zPosition);
+      torchRef.current.position.set(xPosition, Y_POSITION, zPosition);
 
       ////////////////////////////
       ///// Bullets manager
@@ -191,21 +198,24 @@ const Player = () => {
 
       if (action) {
         const now = Date.now();
-        if (now >= (player.current.timeToShoot || 0)) {
-          player.current.timeToShoot = now + 650;
+        if (now >= (playerRef.current.timeToShoot || 0)) {
+          playerRef.current.timeToShoot = now + 650;
           shoot(true);
           // Time for animation to finish
           setTimeout(() => {
+            setBullets((bullets) => [
+              // ...bullets,
+              {
+                id: now,
+                position: [bulletPosition.x, bulletPosition.y, bulletPosition.z],
+                forward: [bulletDirection.x, bulletDirection.y, bulletDirection.z],
+              },
+            ]);
+          }, 650);
+
+          setTimeout(() => {
             shoot(false);
-          }, 350);
-          setBullets((bullets) => [
-            // ...bullets,
-            {
-              id: now,
-              position: [bulletPosition.x, bulletPosition.y, bulletPosition.z],
-              forward: [bulletDirection.x, bulletDirection.y, bulletDirection.z],
-            },
-          ]);
+          }, 650);
         }
       }
     }, 10),
@@ -213,14 +223,13 @@ const Player = () => {
   );
 
   useFrame(({ camera, scene }) => playerControl(camera, scene, moveForward, moveBackward, moveRight, moveLeft, action));
-
-  console.log('Player rendering...');
+  //0xf78811
 
   return (
     <>
       <FPVControls />
-      {/* <PointerLockControls></PointerLockControls> */}
-      <mesh ref={player} position={[2, 0.5, 2]} name="player" />
+      <mesh ref={playerRef} position={[2, 0.5, 2]} name="player" />
+      <pointLight ref={torchRef} intensity={30} castShadow={false} color={0xbe7bf9} decay={3} />
       {bullets.map((bullet) => {
         return (
           <Bullet
@@ -237,4 +246,4 @@ const Player = () => {
   );
 };
 
-export default React.memo(Player);
+export const Player = React.memo(_Player);

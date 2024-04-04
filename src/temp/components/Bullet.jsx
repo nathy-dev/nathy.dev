@@ -1,7 +1,7 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import throttle from '../utils/throttle.ts';
-import { calcDistance } from '../utils/calcDistance';
+import throttle from '../util/throttle.ts';
+import { calcDistance } from '../physics/calcDistance.ts';
 import fireSound from '../sounds/fire.mp3';
 
 const _Bullet = ({ position, velocity, name, setBullets, collisionMarker }) => {

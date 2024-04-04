@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import throttle from '../utils/throttle.ts';
+import throttle from '../util/throttle.ts';
 import { MeshStandardMaterial, Vector3 } from 'three';
 
-import { deadEnemyStaticMaterial, enemyGeometry, enemyMaterial } from '../shared-geometries/enemy';
+import { deadEnemyStaticMaterial, enemyGeometry, enemyMaterial } from '../util/geometries.ts';
 import { Bullet } from './Bullet.jsx';
-import { calcDistance, closestObject } from '../utils/calcDistance';
-import limitNumberWithinRange from '../utils/limitNumberWithinRange';
-import calcLine from '../utils/calcLine';
-import { imgLoader } from '../utils/textureManager';
+import { calcDistance, closestObject } from '../physics/calcDistance.ts';
+import { trimNumber } from '../util/trimNumber.ts';
+import { calcLine } from '../physics/calcLine.ts';
+import { imgLoader } from '../util/textures.ts';
 import deadEnemyImg from '../images/dead-enemy.gif';
 import enemyDeathSound from '../sounds/enemy-death.wav';
 
@@ -26,9 +26,6 @@ const SHOULD_MOVE = true;
 const possibleEnemyWDirection = ['up', 'down', 'right', 'left'];
 
 const direction = new Vector3();
-
-// TODO: Consider to use Web Workers
-// TODO: Split logic into smaller files
 
 const Enemy = ({ position }) => {
   const [bullets, setBullets] = useState([]);
@@ -208,14 +205,14 @@ const Enemy = ({ position }) => {
           // Stop moving when too close to player
           if (!playerProximityChase) {
             ref?.current?.position.set(
-              limitNumberWithinRange(
+              trimNumber(
                 (playerDirectionChase.x < 0 ? Math.abs(playerDirectionChase.x) : -Math.abs(playerDirectionChase.x)) +
                   enemyPosition?.x,
                 leftClosest,
                 rightClosest,
               ),
               POSITION_Y,
-              limitNumberWithinRange(
+              trimNumber(
                 (playerDirectionChase.z < 0 ? Math.abs(playerDirectionChase.z) : -Math.abs(playerDirectionChase.z)) +
                   enemyPosition?.z,
                 topClosest,
@@ -293,8 +290,6 @@ const Enemy = ({ position }) => {
       ref.current.enemyWDirection = possibleEnemyWDirection[Math.floor(Math.random() * possibleEnemyWDirection.length)];
     }
   }, []);
-
-  console.log('Enemy rendering...');
 
   return (
     <>

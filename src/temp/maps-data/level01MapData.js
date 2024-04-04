@@ -1,4 +1,4 @@
-import { mapDataString } from '../utils/mapDataString';
+import { mapDataString } from '../util/mapDataString';
 
 const mapData = mapDataString(`
 # # # # # # # # # # # # # # # # #

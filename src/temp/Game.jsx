@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Loader } from '@react-three/drei';
 
-import Level01 from './levels/Level01.jsx';
+import { Map } from './map/Map.jsx';
 import UI from './components/UI.jsx';
 import ViewFinder from './components/ViewFinder.jsx';
 import Gun from './components/Gun.jsx';
@@ -25,7 +25,7 @@ export const Game = () => {
           mode="concurrent"
           camera={{ position: [0, 5, 0], rotation: [0, 3.2, 0] }}
         >
-          <Level01 />
+          <Map />
         </Canvas>
       </Suspense>
     </>

@@ -1,9 +1,9 @@
 import React, { useCallback, useRef } from 'react';
 
-import throttle from '../utils/throttle';
+import throttle from '../util/throttle.ts';
 import { useFrame } from '@react-three/fiber';
 
-const FlatObject = ({ texture, position, name }) => {
+const _FlatObject = ({ texture, position, name, emissive }) => {
   const ref = useRef();
 
   const objectControl = useCallback(
@@ -18,7 +18,7 @@ const FlatObject = ({ texture, position, name }) => {
   return (
     <mesh ref={ref} position={position} name={name}>
       <planeGeometry attach="geometry" />
-      <meshStandardMaterial attach="material" transparent={true} map={texture} />
+      <meshStandardMaterial attach="material" transparent={true} map={texture} emissive={emissive} />
     </mesh>
   );
 };
@@ -27,4 +27,4 @@ const isSameType = (prevProps, nextProps) => {
   return prevProps.type === nextProps.type;
 };
 
-export default React.memo(FlatObject, isSameType);
+export const FlatObject = React.memo(_FlatObject, isSameType);

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import throttle from '../utils/throttle.ts';
+import throttle from '../util/throttle.ts';
 
-const PointLight = ({ position }) => {
+const _PointLight = ({ position }) => {
   const ref = useRef();
 
   const playerControl = useCallback(
@@ -26,8 +26,6 @@ const PointLight = ({ position }) => {
     ref.current.goRight = true;
   }, []);
 
-  console.log('Light rendering...');
-
   return (
     <pointLight ref={ref} distance={20} decay={2} position={position} intensity={1} castShadow={true} color="white" />
   );
@@ -37,4 +35,4 @@ const isSameType = (prevProps, nextProps) => {
   return prevProps.type === nextProps.type;
 };
 
-export default React.memo(PointLight, isSameType);
+export const PointLight = React.memo(_PointLight, isSameType);

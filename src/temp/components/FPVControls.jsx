@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useThree } from '@react-three/fiber';
 import { useRef } from 'react';
-import fireSound from '../sounds/music.mp3';
+import ballad from '../sounds/ballad.mp3';
 import { PointerLockControls } from '@react-three/drei';
 
-const sound = new Audio(fireSound);
+const sound = new Audio(ballad);
 
 const _FPVControls = () => {
   const { camera, gl } = useThree();
