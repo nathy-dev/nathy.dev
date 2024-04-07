@@ -1,11 +1,10 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import throttle from '../util/throttle.ts';
+import { throttle } from '../util/throttle.ts';
 import { Vector3 } from 'three';
 
-import { useAction } from '../store';
 import { FPVControls } from './FPVControls.jsx';
-import { useKeyboardControls } from '../hooks/useKeyboardControls';
+import { useKeyboardControls } from '../hooks/useKeyboardControls.ts';
 import { Bullet } from './Bullet.jsx';
 import { calcDistance, closestObject } from '../physics/calcDistance.ts';
 import { trimNumber } from '../util/trimNumber.ts';

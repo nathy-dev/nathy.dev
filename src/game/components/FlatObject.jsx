@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from 'react';
 
-import throttle from '../util/throttle.ts';
+import { throttle } from '../util/throttle.ts';
 import { useFrame } from '@react-three/fiber';
 
 const _FlatObject = ({ texture, position, name, emissive }) => {

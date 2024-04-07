@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { Theme, ThemeContext } from './context/ThemeContext.tsx';
 import { GameboyWrapper } from './components/GameboyWrapper.tsx';
 
-import { Game } from './temp/Game.jsx';
+import { Game } from './game/Game.jsx';
 
 function App() {
   const [theme, setTheme] = useState<Theme>({

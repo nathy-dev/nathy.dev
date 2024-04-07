@@ -10,8 +10,7 @@ import GifLoader from 'three-gif-loader';
 
 import wallImg from '../images/wall.png';
 import floorImg from '../images/floor.png';
-import coinImg from '../images/shard.png';
-import barrelImg from '../images/barrel.png';
+import shardImg from '../images/shard.png';
 import orbImg from '../images/orb.gif';
 import deadEnemyStaticImg from '../images/dead-enemy-static.png';
 import skellyImg from '../images/skellyWalk.gif';
@@ -38,10 +37,8 @@ export const imgLoader = (path: string, type?: 'gif' | 'img'): Texture => {
 };
 
 export const wall = imgLoader(wallImg);
-export const shard = imgLoader(coinImg);
-export const barrel = imgLoader(barrelImg);
+export const shard = imgLoader(shardImg);
 export const orb = imgLoader(orbImg, 'gif');
-// export const enemy = imgLoader(enemyImg, 'gif');
 export const enemy = imgLoader(skellyImg, 'gif');
 export const deadEnemyStatic = imgLoader(deadEnemyStaticImg);
 

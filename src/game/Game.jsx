@@ -7,8 +7,6 @@ import UI from './components/UI.jsx';
 import { Staff } from './components/Staff.tsx';
 import { PlayerUi } from './components/PlayerUi.tsx';
 
-import './index.css';
-
 export const Game = () => {
   return (
     <>

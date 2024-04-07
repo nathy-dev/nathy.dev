@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import throttle from '../util/throttle.ts';
+import { throttle } from '../util/throttle.ts';
 
 const _PointLight = ({ position }) => {
   const ref = useRef();

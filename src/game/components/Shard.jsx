@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import throttle from '../util/throttle.ts';
+import { throttle } from '../util/throttle.ts';
 
 import { shard } from '../util/textures.ts';
 import coinSound from '../sounds/coin.wav';

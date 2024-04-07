@@ -1,6 +1,6 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import throttle from '../util/throttle.ts';
+import { throttle } from '../util/throttle.ts';
 import { calcDistance } from '../physics/calcDistance.ts';
 import fireSound from '../sounds/fire.mp3';
 import { useGameStore } from '../store.ts';

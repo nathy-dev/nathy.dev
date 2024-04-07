@@ -1,5 +1,5 @@
 import staffIdle from '../images/staff.png';
-import staffShoot from '../images/staffCastNew.gif';
+import staffShoot from '../images/staffCast.gif';
 import { useGameStore } from '../store.ts';
 
 export const Staff = () => {

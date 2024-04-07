@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import throttle from '../util/throttle.ts';
+import { throttle } from '../util/throttle.ts';
 import { MeshStandardMaterial, Vector3 } from 'three';
 
 import { deadEnemyStaticMaterial, enemyGeometry, enemyMaterial } from '../util/geometries.ts';
