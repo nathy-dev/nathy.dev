@@ -29,12 +29,11 @@ const direction = new Vector3();
 
 const Enemy = ({ position }) => {
   const [bullets, setBullets] = useState([]);
-
+  const [isAlive, setIsAlive] = useState(true);
   const sound = new Audio(enemyDeathSound);
 
   const [baseMaterial, setBaseMaterial] = useState(enemyMaterial);
 
-  let isAlive = true;
   let currTime = 0;
   let prevTime = 0;
 
@@ -60,7 +59,7 @@ const Enemy = ({ position }) => {
           transparent: true,
         });
 
-        isAlive = false;
+        setIsAlive(false);
 
         sound.play();
         setBaseMaterial(deadEnemyMaterial);
@@ -279,7 +278,7 @@ const Enemy = ({ position }) => {
         }
       }
     }, 10),
-    [],
+    [isAlive],
   );
 
   useFrame(({ scene, camera, clock }) => enemyControl(scene, camera, clock));
@@ -308,6 +307,7 @@ const Enemy = ({ position }) => {
             velocity={bullet.forward}
             setBullets={setBullets}
             collisionMarker={['player', 'wall']}
+            color={0xc41e3a}
           />
         );
       })}

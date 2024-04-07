@@ -3,10 +3,13 @@ import { useFrame } from '@react-three/fiber';
 import throttle from '../util/throttle.ts';
 import { calcDistance } from '../physics/calcDistance.ts';
 import fireSound from '../sounds/fire.mp3';
+import { useGameStore } from '../store.ts';
 
-const _Bullet = ({ position, velocity, name, setBullets, collisionMarker }) => {
+const _Bullet = ({ position, velocity, name, setBullets, collisionMarker, color }) => {
   const sound = new Audio(fireSound);
   const ref = useRef();
+
+  const { health, takeDamage } = useGameStore();
 
   sound.volume = 0.5;
 
@@ -28,6 +31,11 @@ const _Bullet = ({ position, velocity, name, setBullets, collisionMarker }) => {
 
       if (collisions.length) {
         setBullets([]);
+        collisions
+          .filter((collision) => collision.name === 'player')
+          .forEach((_collision) => {
+            takeDamage();
+          });
       } else {
         ref?.current?.position.set(velocity[0] + position?.x, velocity[1] + position?.y, velocity[2] + position?.z);
       }
@@ -40,6 +48,7 @@ const _Bullet = ({ position, velocity, name, setBullets, collisionMarker }) => {
   return (
     <mesh ref={ref} position={position} name={name}>
       <sphereGeometry args={[0.05, 32, 32]} />
+      <meshStandardMaterial color={color} />
     </mesh>
   );
 };

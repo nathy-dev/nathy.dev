@@ -1,6 +1,6 @@
 type PixelBoxProps = {
   children: React.ReactNode;
-  variant?: 'button' | 'default';
+  variant?: 'button' | 'game' | 'default';
 };
 
 export const PixelBox = ({ children, variant }: PixelBoxProps) => {
@@ -8,6 +8,14 @@ export const PixelBox = ({ children, variant }: PixelBoxProps) => {
     <div className="border-text border-t-4 border-b-4 w-10 md:w-16">
       <div className="border-text border-r-4 border-l-4 -mx-1 bg-opacity-90 group-hover:bg-tangerine">
         <div>{children}</div>
+      </div>
+    </div>
+  ) : variant === 'game' ? (
+    <div>
+      <div className="border-t-4 border-b-4 border-ghoul">
+        <div className="bg-ink border-r-4 border-l-4 border-ghoul -mx-1 text-ghoul">
+          <div className="p-4 w-fit h-fit">{children}</div>
+        </div>
       </div>
     </div>
   ) : (

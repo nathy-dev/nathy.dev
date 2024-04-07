@@ -67,7 +67,7 @@ export const Map = () => {
       <Flame position={[10, 0.5, 20]} />
       <Flame position={[20, 0.5, 40]} />
       <spotLight position={[10, 10, 10]} angle={0.5} intensity={1} castShadow={true} penumbra={1} />
-      <Stats />
+      {/* <Stats /> */}
     </>
   );
 };

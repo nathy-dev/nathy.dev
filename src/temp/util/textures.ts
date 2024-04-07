@@ -13,8 +13,8 @@ import floorImg from '../images/floor.png';
 import coinImg from '../images/shard.png';
 import barrelImg from '../images/barrel.png';
 import orbImg from '../images/orb.gif';
-import enemyImg from '../images/enemy.gif';
 import deadEnemyStaticImg from '../images/dead-enemy-static.png';
+import skellyImg from '../images/skellyWalk.gif';
 
 // instantiate GifLoader
 const gifLoader = new GifLoader();
@@ -41,7 +41,8 @@ export const wall = imgLoader(wallImg);
 export const shard = imgLoader(coinImg);
 export const barrel = imgLoader(barrelImg);
 export const orb = imgLoader(orbImg, 'gif');
-export const enemy = imgLoader(enemyImg, 'gif');
+// export const enemy = imgLoader(enemyImg, 'gif');
+export const enemy = imgLoader(skellyImg, 'gif');
 export const deadEnemyStatic = imgLoader(deadEnemyStaticImg);
 
 export const floor = imgLoader(floorImg);

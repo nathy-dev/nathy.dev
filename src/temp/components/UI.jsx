@@ -8,7 +8,7 @@ const UI = ({ children }) => {
         top: '0',
         left: '0',
         width: '100vw',
-        height: '0',
+        height: '100vh',
         display: 'flex',
         zIndex: '100',
       }}

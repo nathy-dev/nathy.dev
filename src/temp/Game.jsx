@@ -4,8 +4,8 @@ import { Loader } from '@react-three/drei';
 
 import { Map } from './map/Map.jsx';
 import UI from './components/UI.jsx';
-import ViewFinder from './components/ViewFinder.jsx';
-import Gun from './components/Gun.jsx';
+import { Staff } from './components/Staff.tsx';
+import { PlayerUi } from './components/PlayerUi.tsx';
 
 import './index.css';
 
@@ -15,8 +15,8 @@ export const Game = () => {
       <Suspense fallback={null}>
         <Loader />
         <UI>
-          <ViewFinder />
-          <Gun />
+          <Staff />
+          <PlayerUi />
         </UI>
         <Canvas
           shadows={{

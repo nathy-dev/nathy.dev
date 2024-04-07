@@ -12,6 +12,9 @@ export default {
     },
     colors: {
       tangerine: '#f78811',
+      ink: '#0e1409',
+      scroll: '#fefae0',
+      ghoul: '#be7bf9',
       background: 'rgb(var(--background) / <alpha-value>)',
       text: 'rgb(var(--text) / <alpha-value>)',
     },

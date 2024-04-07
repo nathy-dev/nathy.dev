@@ -5,8 +5,10 @@ import throttle from '../util/throttle.ts';
 import { shard } from '../util/textures.ts';
 import coinSound from '../sounds/coin.wav';
 import { calcDistance } from '../physics/calcDistance.ts';
+import { useGameStore } from '../store.ts';
 
 const _Shard = ({ position, mapData, setCurrentMap }) => {
+  const { collectShard } = useGameStore();
   const sound = new Audio(coinSound);
   const ref = useRef();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -29,6 +31,7 @@ const _Shard = ({ position, mapData, setCurrentMap }) => {
         let newMapData = [...mapData];
         newMapData[position[2]][position[0]] = '·';
         setCurrentMap(newMapData);
+        collectShard();
       }
     }, 100),
     [],

@@ -9,6 +9,7 @@ import { useKeyboardControls } from '../hooks/useKeyboardControls';
 import { Bullet } from './Bullet.jsx';
 import { calcDistance, closestObject } from '../physics/calcDistance.ts';
 import { trimNumber } from '../util/trimNumber.ts';
+import { useGameStore } from '../store.ts';
 
 const PLAYER_SPEED = 0.09;
 const PLAYER_BULLET_SPEED = 0.8;
@@ -30,7 +31,7 @@ const _Player = () => {
 
   const [bullets, setBullets] = useState([]);
 
-  const shoot = useAction((state) => state.shoot);
+  const { cast, isCasting } = useGameStore();
 
   const playerRef = useRef();
   const torchRef = useRef();
@@ -150,14 +151,6 @@ const _Player = () => {
 
       const angleBottomRightLimit = Number(bottomRightCollisions[0]?.position.x - 1);
 
-      // const bulletCollisions = scene.children.filter((e) => {
-      //   return calcDistance(e.position, position) <= 0.8 && e.name === 'bullet';
-      // });
-
-      // if (bulletCollisions.length) {
-      //   console.log('player hit');
-      // }
-
       ////////////////////////////
       ///// Camera & direction manager
       ////////////////////////////
@@ -191,31 +184,29 @@ const _Player = () => {
       ///// Bullets manager
       ////////////////////////////
 
-      const bulletPosition = camera.position.clone().add(cameraDirection.clone().multiplyScalar(1));
-
-      // Bullet speed
-      const bulletDirection = cameraDirection.clone().multiplyScalar(PLAYER_BULLET_SPEED);
-
-      if (action) {
+      if (action && !isCasting) {
         const now = Date.now();
-        if (now >= (playerRef.current.timeToShoot || 0)) {
-          playerRef.current.timeToShoot = now + 650;
-          shoot(true);
+        if (now >= (playerRef.current.timeToShoot ?? 0)) {
+          playerRef.current.timeToShoot = now + 800;
+          cast();
           // Time for animation to finish
-          setTimeout(() => {
-            setBullets((bullets) => [
-              // ...bullets,
+          await setTimeout(() => {
+            const bulletPosition = camera.position.clone().add(cameraDirection.clone().multiplyScalar(1));
+
+            // Bullet speed
+            const bulletDirection = cameraDirection.clone().multiplyScalar(PLAYER_BULLET_SPEED);
+            setBullets(() => [
               {
                 id: now,
                 position: [bulletPosition.x, bulletPosition.y, bulletPosition.z],
                 forward: [bulletDirection.x, bulletDirection.y, bulletDirection.z],
               },
             ]);
-          }, 650);
+          }, 800);
 
-          setTimeout(() => {
-            shoot(false);
-          }, 650);
+          await setTimeout(() => {
+            cast();
+          }, 1200);
         }
       }
     }, 10),
@@ -223,7 +214,6 @@ const _Player = () => {
   );
 
   useFrame(({ camera, scene }) => playerControl(camera, scene, moveForward, moveBackward, moveRight, moveLeft, action));
-  //0xf78811
 
   return (
     <>
@@ -239,6 +229,7 @@ const _Player = () => {
             name="bullet"
             setBullets={setBullets}
             collisionMarker={['enemy', 'wall']}
+            color={0xbe7bf9}
           />
         );
       })}
