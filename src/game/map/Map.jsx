@@ -4,9 +4,7 @@ import { Stats, Instance } from '@react-three/drei';
 import { PlaneOb } from '../components/PlaneOb.jsx';
 import { Player } from '../components/Player.jsx';
 import Enemy from '../components/Enemy.jsx';
-import { FlatObject } from '../components/FlatObject.jsx';
 import { Shard } from '../components/Shard.jsx';
-import { barrel } from '../util/textures.ts';
 import { mapData } from './mapHelper.js';
 import { Group } from '../components/Group.jsx';
 import { PointLight } from '../components/PointLight.jsx';
@@ -17,7 +15,7 @@ const resolveMapTile = (type, x, y, mapData, setCurrentMap) => {
 
   switch (type) {
     case 'T':
-      return <FlatObject key={key} position={[x, 0.5, y]} texture={barrel} name="blocking" />;
+      return null;
     case 'C':
       return <Shard key={key} position={[x, 0.5, y]} mapData={mapData} setCurrentMap={setCurrentMap} type={type} />;
     case 'E':

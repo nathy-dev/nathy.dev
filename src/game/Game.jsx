@@ -6,11 +6,12 @@ import { Map } from './map/Map.jsx';
 import UI from './components/UI.jsx';
 import { Staff } from './components/Staff.tsx';
 import { PlayerUi } from './components/PlayerUi.tsx';
+import { TitleScreen } from './components/TitleScreen.tsx';
 
 export const Game = () => {
   return (
     <>
-      <Suspense fallback={null}>
+      {/* <Suspense fallback={null}>
         <Loader />
         <UI>
           <Staff />
@@ -25,7 +26,8 @@ export const Game = () => {
         >
           <Map />
         </Canvas>
-      </Suspense>
+      </Suspense> */}
+      <TitleScreen />
     </>
   );
 };

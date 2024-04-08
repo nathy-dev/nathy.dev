@@ -4,7 +4,6 @@ import { Content } from './components/Content.tsx';
 import { useEffect, useState } from 'react';
 import { Theme, ThemeContext } from './context/ThemeContext.tsx';
 import { GameboyWrapper } from './components/GameboyWrapper.tsx';
-
 import { Game } from './game/Game.jsx';
 
 function App() {

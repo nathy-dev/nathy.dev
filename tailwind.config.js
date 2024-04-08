@@ -22,6 +22,9 @@ export default {
       xs: '325px',
       ...defaultTheme.screens,
     },
+    backgroundImage: {
+      brick: "url('../public/floor.png')",
+    },
   },
   darkMode: 'class',
   plugins: [],
