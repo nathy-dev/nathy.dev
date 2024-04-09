@@ -9,7 +9,7 @@ import { calcDistance, closestObject } from '../physics/calcDistance.ts';
 import { trimNumber } from '../util/trimNumber.ts';
 import { calcLine } from '../physics/calcLine.ts';
 import { imgLoader } from '../util/textures.ts';
-import deadEnemyImg from '../images/dead-enemy.gif';
+import deadEnemyImg from '../images/enemy_death.gif';
 import enemyDeathSound from '../sounds/enemy-death.wav';
 
 const ENEMY_SPEED = 0.025;
@@ -65,8 +65,9 @@ const Enemy = ({ position }) => {
         setBaseMaterial(deadEnemyMaterial);
 
         // set persistent material after death effect
-        setTimeout(function () {
+        setTimeout(() => {
           setBaseMaterial(deadEnemyStaticMaterial);
+          enemyPosition.y -= 0.5;
         }, 1000);
       }
 
@@ -298,6 +299,7 @@ const Enemy = ({ position }) => {
         geometry={enemyGeometry}
         material={baseMaterial}
         name={`enemy-${position[0]}-${position[2]}`}
+        isAlive={isAlive}
       />
       {bullets.map((bullet) => {
         return (

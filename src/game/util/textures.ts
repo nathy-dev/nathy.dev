@@ -12,7 +12,7 @@ import wallImg from '../images/wall.png';
 import floorImg from '../images/floor.png';
 import shardImg from '../images/shard.png';
 import orbImg from '../images/orb.gif';
-import deadEnemyStaticImg from '../images/dead-enemy-static.png';
+import deadEnemyStaticImg from '../images/bones.png';
 import skellyImg from '../images/skellyWalk.gif';
 
 // instantiate GifLoader

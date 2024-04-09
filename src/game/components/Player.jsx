@@ -47,7 +47,9 @@ const _Player = () => {
 
       const wallsCollisions = [
         ...scene.children[0].children,
-        ...scene.children.filter((obj) => obj.name.includes('enemy')),
+        ...scene.children.filter((obj) => {
+          return obj.name.includes('enemy') && obj.isAlive;
+        }),
       ].filter((e) => {
         return calcDistance(e.position, position) <= WORLD_COLLISION_MARGIN;
       });
