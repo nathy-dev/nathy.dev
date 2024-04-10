@@ -1,4 +1,14 @@
+import { ReactNode } from 'react';
 import { PixelBox } from '../../components/PixelBox.tsx';
+
+const Option = ({ id, children, onClick }: { id: string; children: ReactNode; onClick?: () => void }) => {
+  return (
+    <div className="flex flex-row gap-2 items-center text-left">
+      <input type="checkbox" id={id} className="accent-ghoul" />
+      <label htmlFor={id}>{children}</label>
+    </div>
+  );
+};
 
 export const TitleScreen = () => {
   return (
@@ -15,20 +25,14 @@ export const TitleScreen = () => {
               <div className="border-2 border-dotted background-ghoul m-2" />
             </div>
             <div>
-              <div className="flex flex-row gap-2">
-                <input type="checkbox" id="mute" />
-                <label htmlFor="mute">Disable sound</label>
-              </div>
-              <div className="flex flex-row gap-2">
-                <input type="checkbox" id="performance" />
-                <label htmlFor="performance">Reduce light effects (reccomended for low end mobile devices)</label>
-              </div>
+              <Option id="mute">Disable sound</Option>
+              <Option id="performance">Reduce light effects (reccomended for older mobile devices)</Option>
             </div>
           </div>
         </PixelBox>
-        <PixelBox variant="game">
-          <button>Start game</button>
-        </PixelBox>
+        <button>
+          <PixelBox variant="game">Start game</PixelBox>
+        </button>
       </div>
     </div>
   );
