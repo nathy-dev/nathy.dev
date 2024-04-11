@@ -179,6 +179,7 @@ const _Player = () => {
       );
       const zPosition = trimNumber(playerDirection.z + position.z, topClosest, bottomClosest);
       playerRef.current.position.set(xPosition, Y_POSITION, zPosition);
+
       torchRef.current.position.set(xPosition, Y_POSITION, zPosition);
 
       ////////////////////////////

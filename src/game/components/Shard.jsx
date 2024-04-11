@@ -8,9 +8,10 @@ import { calcDistance } from '../physics/calcDistance.ts';
 import { useGameStore } from '../store.ts';
 
 const _Shard = ({ position, mapData, setCurrentMap }) => {
-  const { collectShard } = useGameStore();
-  const sound = new Audio(coinSound);
+  const { collectShard, isMuted } = useGameStore();
   const ref = useRef();
+  const sound = new Audio(coinSound);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const shardControl = useCallback(
     throttle(async (scene, camera) => {
@@ -27,7 +28,9 @@ const _Shard = ({ position, mapData, setCurrentMap }) => {
         }) < 1;
 
       if (collision) {
-        await sound.play();
+        if (!isMuted) {
+          sound.play();
+        }
         let newMapData = [...mapData];
         newMapData[position[2]][position[0]] = '·';
         setCurrentMap(newMapData);

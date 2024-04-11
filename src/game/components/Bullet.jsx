@@ -9,11 +9,12 @@ const _Bullet = ({ position, velocity, name, setBullets, collisionMarker, color 
   const sound = new Audio(fireSound);
   const ref = useRef();
 
-  const { health, takeDamage } = useGameStore();
+  const { health, takeDamage, isMuted } = useGameStore();
 
   sound.volume = 0.5;
 
   useEffect(() => {
+    if (isMuted) return;
     sound.play();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

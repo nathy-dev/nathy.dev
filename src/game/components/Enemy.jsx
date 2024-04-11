@@ -11,6 +11,7 @@ import { calcLine } from '../physics/calcLine.ts';
 import { imgLoader } from '../util/textures.ts';
 import deadEnemyImg from '../images/enemy_death.gif';
 import enemyDeathSound from '../sounds/enemy-death.wav';
+import { useGameStore } from '../store.ts';
 
 const ENEMY_SPEED = 0.025;
 const ENEMY_CHASE_SPEED = 0.0075;
@@ -30,16 +31,16 @@ const direction = new Vector3();
 const Enemy = ({ position }) => {
   const [bullets, setBullets] = useState([]);
   const [isAlive, setIsAlive] = useState(true);
-  const sound = new Audio(enemyDeathSound);
-
   const [baseMaterial, setBaseMaterial] = useState(enemyMaterial);
+
+  const sound = new Audio(enemyDeathSound);
+  const { isMuted } = useGameStore();
 
   let currTime = 0;
   let prevTime = 0;
 
   const ref = useRef();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const enemyControl = useCallback(
     throttle(async (scene, camera, clock) => {
       const enemyPosition = ref.current?.position;
@@ -61,7 +62,9 @@ const Enemy = ({ position }) => {
 
         setIsAlive(false);
 
-        sound.play();
+        if (!isMuted) {
+          sound.play();
+        }
         setBaseMaterial(deadEnemyMaterial);
 
         // set persistent material after death effect

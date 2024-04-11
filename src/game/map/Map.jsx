@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Stats, Instance } from '@react-three/drei';
+import { Instance } from '@react-three/drei';
 
 import { PlaneOb } from '../components/PlaneOb.jsx';
 import { Player } from '../components/Player.jsx';
@@ -64,8 +64,6 @@ export const Map = () => {
       <ambientLight intensity={0.1} />
       <Flame position={[10, 0.5, 20]} />
       <Flame position={[20, 0.5, 40]} />
-      <spotLight position={[10, 10, 10]} angle={0.5} intensity={1} castShadow={true} penumbra={1} />
-      {/* <Stats /> */}
     </>
   );
 };

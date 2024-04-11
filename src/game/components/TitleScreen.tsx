@@ -1,18 +1,30 @@
 import { ReactNode } from 'react';
 import { PixelBox } from '../../components/PixelBox.tsx';
+import { useGameStore } from '../store.ts';
+import { MuteButton } from './MuteButton.tsx';
 
-const Option = ({ id, children, onClick }: { id: string; children: ReactNode; onClick?: () => void }) => {
+type OptionProps = {
+  id: string;
+  children: ReactNode;
+  onClick: () => void;
+  checked: boolean;
+};
+
+const Option = ({ id, children, onClick, checked }: OptionProps) => {
   return (
     <div className="flex flex-row gap-2 items-center text-left">
-      <input type="checkbox" id={id} className="accent-ghoul" />
+      <input type="checkbox" id={id} className="accent-ghoul" checked={checked} onChange={() => onClick()} />
       <label htmlFor={id}>{children}</label>
     </div>
   );
 };
 
 export const TitleScreen = () => {
+  const { isMuted, toggleMute } = useGameStore();
+
   return (
     <div className="w-full h-full bg-brick bg-repeat flex flex-col items-center text-center">
+      <MuteButton />
       <div className="max-w-xs md:max-w-lg h-full flex flex-col items-center justify-center gap-4">
         <PixelBox variant="game">
           <div className="flex flex-col gap-2">
@@ -25,8 +37,9 @@ export const TitleScreen = () => {
               <div className="border-2 border-dotted background-ghoul m-2" />
             </div>
             <div>
-              <Option id="mute">Disable sound</Option>
-              <Option id="performance">Reduce light effects (reccomended for older mobile devices)</Option>
+              <Option id="mute" checked={isMuted} onClick={toggleMute}>
+                Disable sound
+              </Option>
             </div>
           </div>
         </PixelBox>

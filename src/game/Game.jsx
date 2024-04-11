@@ -7,15 +7,17 @@ import UI from './components/UI.jsx';
 import { Staff } from './components/Staff.tsx';
 import { PlayerUi } from './components/PlayerUi.tsx';
 import { TitleScreen } from './components/TitleScreen.tsx';
+import { MuteButton } from './components/MuteButton.tsx';
 
 export const Game = () => {
   return (
     <>
-      {/* <Suspense fallback={null}>
+      <Suspense fallback={null}>
         <Loader />
         <UI>
           <Staff />
           <PlayerUi />
+          <MuteButton />
         </UI>
         <Canvas
           shadows={{
@@ -26,8 +28,8 @@ export const Game = () => {
         >
           <Map />
         </Canvas>
-      </Suspense> */}
-      <TitleScreen />
+      </Suspense>
+      {/* <TitleScreen /> */}
     </>
   );
 };
