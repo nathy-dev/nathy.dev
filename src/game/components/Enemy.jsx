@@ -282,7 +282,7 @@ const Enemy = ({ position }) => {
         }
       }
     }, 10),
-    [isAlive],
+    [isAlive, isMuted],
   );
 
   useFrame(({ scene, camera, clock }) => enemyControl(scene, camera, clock));

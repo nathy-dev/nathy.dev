@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UI = ({ children }) => {
+export const UI = ({ children }) => {
   return (
     <div
       style={{
@@ -17,5 +17,3 @@ const UI = ({ children }) => {
     </div>
   );
 };
-
-export default UI;

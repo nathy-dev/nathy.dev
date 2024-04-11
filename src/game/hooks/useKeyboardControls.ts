@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 
 type Movement = 'moveForward' | 'moveBackward' | 'moveLeft' | 'moveRight' | 'action';
-type SpecialKey = 'KeyW' | 'KeyS' | 'KeyA' | 'KeyA' | 'KeyD' | 'Space';
+type SpecialKey = 'KeyW' | 'KeyS' | 'KeyA' | 'KeyA' | 'KeyD' | 'Space' | 'KeyN' | 'KeyM';
 type MovementMap = {
   moveForward: number;
   moveBackward: number;
   moveLeft: number;
   moveRight: number;
   action: number;
+  mute: number;
+  pause: number;
   lastMovement: Movement | null;
 };
 
@@ -19,6 +21,8 @@ const movementByValue = (movement: Movement): number => {
     moveLeft: -value,
     moveRight: value,
     action: value,
+    mute: value,
+    pause: value,
   };
   return actions[movement];
 };
@@ -30,6 +34,8 @@ const movementByKey = (key: SpecialKey): Movement => {
     KeyA: 'moveLeft',
     KeyD: 'moveRight',
     Space: 'action',
+    KeyN: 'pause',
+    KeyM: 'mute',
   };
   return keys[key] as Movement;
 };
@@ -41,6 +47,8 @@ export const useKeyboardControls = () => {
     moveLeft: 0,
     moveRight: 0,
     action: 0,
+    mute: 0,
+    pause: 0,
     lastMovement: null,
   });
 

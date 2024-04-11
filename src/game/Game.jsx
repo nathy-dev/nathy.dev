@@ -1,35 +1,52 @@
-import React, { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Loader } from '@react-three/drei';
 
 import { Map } from './map/Map.jsx';
-import UI from './components/UI.jsx';
+import { UI } from './components/UI.jsx';
 import { Staff } from './components/Staff.tsx';
 import { PlayerUi } from './components/PlayerUi.tsx';
 import { TitleScreen } from './components/TitleScreen.tsx';
 import { MuteButton } from './components/MuteButton.tsx';
+import { useKeyboardControls } from './hooks/useKeyboardControls.ts';
+import { useGameStore } from './store.ts';
 
 export const Game = () => {
+  const [gameStarted, setGameStarted] = useState(false);
+
+  const { mute } = useKeyboardControls();
+  const { toggleMute } = useGameStore();
+
+  useEffect(() => {
+    if (mute) {
+      toggleMute();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mute]);
+
   return (
     <>
-      <Suspense fallback={null}>
-        <Loader />
-        <UI>
-          <Staff />
-          <PlayerUi />
-          <MuteButton />
-        </UI>
-        <Canvas
-          shadows={{
-            type: 'BasicShadowMap',
-          }}
-          mode="concurrent"
-          camera={{ position: [0, 5, 0], rotation: [0, 3.2, 0] }}
-        >
-          <Map />
-        </Canvas>
-      </Suspense>
-      {/* <TitleScreen /> */}
+      {!gameStarted ? (
+        <TitleScreen onStartClick={() => setGameStarted(true)} />
+      ) : (
+        <Suspense fallback={null}>
+          <Loader />
+          <UI>
+            <Staff />
+            <PlayerUi />
+            <MuteButton />
+          </UI>
+          <Canvas
+            shadows={{
+              type: 'BasicShadowMap',
+            }}
+            mode="concurrent"
+            camera={{ position: [0, 5, 0], rotation: [0, 3.2, 0] }}
+          >
+            <Map />
+          </Canvas>
+        </Suspense>
+      )}
     </>
   );
 };

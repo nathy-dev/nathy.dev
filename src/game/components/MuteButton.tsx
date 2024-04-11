@@ -25,7 +25,7 @@ export const MuteButton = () => {
     <div className="absolute top-2 right-4">
       <PixelBox variant="game">
         <Option id="mute" checked={isMuted} onClick={toggleMute}>
-          Disable sound
+          Mute
         </Option>
       </PixelBox>
     </div>
