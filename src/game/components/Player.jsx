@@ -26,7 +26,7 @@ const sideVector = new Vector3();
 // TODO: Split logic into smaller files
 
 const _Player = () => {
-  const { moveForward, moveBackward, moveLeft, moveRight, action, mute } = useKeyboardControls();
+  const { moveForward, moveBackward, moveLeft, moveRight, action } = useKeyboardControls();
 
   const [bullets, setBullets] = useState([]);
 
