@@ -4,19 +4,16 @@ import { throttle } from '../util/throttle.ts';
 import { calcDistance } from '../physics/calcDistance.ts';
 import fireSound from '../sounds/fire.mp3';
 import { useGameStore } from '../store.ts';
+import { useSound } from '../hooks/useSound.ts';
 
 const _Bullet = ({ position, velocity, name, setBullets, collisionMarker, color }) => {
-  const sound = new Audio(fireSound);
+  const playFire = useSound(fireSound, 0.4);
   const ref = useRef();
 
-  const { health, takeDamage, isMuted } = useGameStore();
-
-  sound.volume = 0.5;
+  const { health, takeDamage } = useGameStore();
 
   useEffect(() => {
-    if (isMuted) return;
-    sound.play();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    playFire()
   }, []);
 
   const bulletControl = useCallback(

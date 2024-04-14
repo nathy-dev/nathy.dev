@@ -10,12 +10,20 @@ import { TitleScreen } from './components/TitleScreen.tsx';
 import { MuteButton } from './components/MuteButton.tsx';
 import { useKeyboardControls } from './hooks/useKeyboardControls.ts';
 import { useGameStore } from './store.ts';
+import ballad from './sounds/ballad.mp3';
+import { useSound } from './hooks/useSound.ts';
 
 export const Game = () => {
   const [gameStarted, setGameStarted] = useState(false);
+  const playBallad = useSound(ballad);
 
   const { mute } = useKeyboardControls();
   const { toggleMute } = useGameStore();
+
+  const handleGameStart = () => {
+    setGameStarted(true);
+    playBallad();
+  }
 
   useEffect(() => {
     if (mute) {
@@ -27,7 +35,7 @@ export const Game = () => {
   return (
     <>
       {!gameStarted ? (
-        <TitleScreen onStartClick={() => setGameStarted(true)} />
+        <TitleScreen onStartClick={() => handleGameStart()} />
       ) : (
         <Suspense fallback={null}>
           <Loader />

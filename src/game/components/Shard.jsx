@@ -3,21 +3,23 @@ import { useFrame } from '@react-three/fiber';
 import { throttle } from '../util/throttle.ts';
 
 import { shard } from '../util/textures.ts';
-import coinSound from '../sounds/coin.wav';
+import pickUpSound from '../sounds/coin.wav';
 import { calcDistance } from '../physics/calcDistance.ts';
 import { useGameStore } from '../store.ts';
+import { useSound } from '../hooks/useSound.ts';
 
 const _Shard = ({ position, mapData, setCurrentMap }) => {
-  const { collectShard, isMuted } = useGameStore();
+  const { collectShard, } = useGameStore();
   const ref = useRef();
-  const sound = new Audio(coinSound);
+
+  const playShardCollect = useSound(pickUpSound)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const shardControl = useCallback(
     throttle(async (scene, camera) => {
       ref.current?.lookAt(camera.position);
 
-      // this is supposed to be the first object in the scene: the player
+      // Player should always be first thing in scene
       const player = scene.children[1].position;
 
       const collision =
@@ -28,9 +30,7 @@ const _Shard = ({ position, mapData, setCurrentMap }) => {
         }) < 1;
 
       if (collision) {
-        if (!isMuted) {
-          sound.play();
-        }
+        playShardCollect();
         let newMapData = [...mapData];
         newMapData[position[2]][position[0]] = '·';
         setCurrentMap(newMapData);
