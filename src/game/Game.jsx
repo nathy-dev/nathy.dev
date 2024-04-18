@@ -15,7 +15,7 @@ import { useSound } from './hooks/useSound.ts';
 
 export const Game = () => {
   const [gameStarted, setGameStarted] = useState(false);
-  const playBallad = useSound(ballad);
+  const playBallad = useSound(ballad, { volume: 1, loop: false });
 
   const { mute } = useKeyboardControls();
   const { toggleMute } = useGameStore();

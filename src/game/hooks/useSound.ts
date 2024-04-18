@@ -1,16 +1,21 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { useGameStore } from "../store.ts";
 
+type SoundControl = {
+    volume: number;
+    loop: boolean;
+}
 
-export const useSound = (soundPath: string, voulme: number = 1) => {
+export const useSound = (soundPath: string, { volume, loop }: SoundControl) => {
     const { isMuted } = useGameStore()
 
     const sound = useMemo(() => {
        const audio = new Audio(soundPath)
-        audio.volume = voulme;
+        audio.volume = volume ?? 1;
+        audio.loop = loop;
         return audio;
 
-}, [soundPath, voulme]);
+}, [soundPath, loop, volume]);
 
     const playSound = useCallback(() => {
         sound.play()

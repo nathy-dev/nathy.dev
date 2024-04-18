@@ -7,10 +7,10 @@ import { useGameStore } from '../store.ts';
 import { useSound } from '../hooks/useSound.ts';
 
 const _Bullet = ({ position, velocity, name, setBullets, collisionMarker, color }) => {
-  const playFire = useSound(fireSound, 0.4);
+  const playFire = useSound(fireSound, {volume: 0.4, loop: false});
   const ref = useRef();
 
-  const { health, takeDamage } = useGameStore();
+  const { takeDamage } = useGameStore();
 
   useEffect(() => {
     playFire()

@@ -28,12 +28,12 @@ const possibleEnemyWDirection = ['up', 'down', 'right', 'left'];
 
 const direction = new Vector3();
 
-const Enemy = ({ position }) => {
+const _Enemy = ({ position }) => {
   const [bullets, setBullets] = useState([]);
   const [isAlive, setIsAlive] = useState(true);
   const [baseMaterial, setBaseMaterial] = useState(enemyMaterial);
 ;
-  const playDeathSound = useSound(enemyDeathSound);
+  const playDeathSound = useSound(enemyDeathSound, {volume: 0.8, loop: false});
 
   let currTime = 0;
   let prevTime = 0;
@@ -322,4 +322,4 @@ const isSameType = (prevProps, nextProps) => {
   return prevProps.type === nextProps.type;
 };
 
-export default React.memo(Enemy, isSameType);
+export const Enemy = React.memo(_Enemy, isSameType);

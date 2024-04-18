@@ -9,7 +9,7 @@ const _FPVControls = () => {
 
 
   useEffect(() => {
-    document.addEventListener('click', () => {
+    document.addEventListener('click', () => {  
       controls.current.lock();
     });
   }, []);

@@ -22,24 +22,19 @@ const playerDirection = new Vector3();
 const frontVector = new Vector3();
 const sideVector = new Vector3();
 
-// TODO: Consider to use Web Workers
-// TODO: Split logic into smaller files
-
 const _Player = () => {
   const { moveForward, moveBackward, moveLeft, moveRight, action } = useKeyboardControls();
 
   const [bullets, setBullets] = useState([]);
 
-  const { cast, isCasting, toggleMute } = useGameStore();
+  const { cast, isCasting } = useGameStore();
 
   const playerRef = useRef();
   const torchRef = useRef();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const playerControl = useCallback(
-    throttle(async (camera, scene, moveForward, moveBackward, moveRight, moveLeft, action, mute) => {
-      // "settings" keypressed
-      if (mute) toggleMute();
+    throttle(async (camera, scene, moveForward, moveBackward, moveRight, moveLeft, action) => {
 
       // player position
       const position = playerRef.current.position;

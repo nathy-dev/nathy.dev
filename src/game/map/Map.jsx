@@ -3,7 +3,7 @@ import { Instance } from '@react-three/drei';
 
 import { PlaneOb } from '../components/PlaneOb.jsx';
 import { Player } from '../components/Player.jsx';
-import Enemy from '../components/Enemy.jsx';
+import { Enemy } from '../components/Enemy.jsx';
 import { Shard } from '../components/Shard.jsx';
 import { mapData } from './mapHelper.js';
 import { Group } from '../components/Group.jsx';
@@ -17,7 +17,7 @@ const resolveMapTile = (type, x, y, mapData, setCurrentMap) => {
     case 'T':
       return null;
     case 'C':
-      return <Shard key={key} position={[x, 0.5, y]} mapData={mapData} setCurrentMap={setCurrentMap} type={type} />;
+      return <Shard key={key} initialPosition={[x, 0.5, y]} mapData={mapData} setCurrentMap={setCurrentMap} type={type} />;
     case 'E':
       return <Enemy key={key} position={[x, 0.75, y]} type={type} mapData={mapData} setCurrentMap={setCurrentMap} />;
     case 'L':

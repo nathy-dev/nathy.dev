@@ -23,7 +23,7 @@ export default {
       ...defaultTheme.screens,
     },
     backgroundImage: {
-      brick: "url('../public/floor.png')",
+      brick: "url('../floor.png')",
     },
   },
   darkMode: 'class',
