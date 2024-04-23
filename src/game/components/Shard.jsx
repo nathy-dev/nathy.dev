@@ -9,11 +9,11 @@ import { useGameStore } from '../store.ts';
 import { useSound } from '../hooks/useSound.ts';
 
 const _Shard = ({ initialPosition }) => {
-  const { collectShard, } = useGameStore();
-  const [collected, setCollected] = useState(false)
+  const { collectShard } = useGameStore();
+  const [collected, setCollected] = useState(false);
   const ref = useRef();
 
-  const playShardCollect = useSound(pickUpSound, { volume: 1, loop: false })
+  const playShardCollect = useSound(pickUpSound, { volume: 1, loop: false });
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const shardControl = useCallback(
@@ -34,7 +34,7 @@ const _Shard = ({ initialPosition }) => {
         playShardCollect();
         // Its cheaper to hide the shard in the floor than it is to unmount it from the scene.
         ref.current.position.y -= 1;
-        setCollected(true)
+        setCollected(true);
         collectShard();
       }
     }, 100),

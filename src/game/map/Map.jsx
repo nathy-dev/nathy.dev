@@ -17,7 +17,9 @@ const resolveMapTile = (type, x, y, mapData, setCurrentMap) => {
     case 'T':
       return null;
     case 'C':
-      return <Shard key={key} initialPosition={[x, 0.5, y]} mapData={mapData} setCurrentMap={setCurrentMap} type={type} />;
+      return (
+        <Shard key={key} initialPosition={[x, 0.5, y]} mapData={mapData} setCurrentMap={setCurrentMap} type={type} />
+      );
     case 'E':
       return <Enemy key={key} position={[x, 0.75, y]} type={type} mapData={mapData} setCurrentMap={setCurrentMap} />;
     case 'L':

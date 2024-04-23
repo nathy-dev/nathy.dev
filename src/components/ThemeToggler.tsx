@@ -43,8 +43,8 @@ export const ThemeToggler = () => {
         }
       </button>
       {showModal && (
-        <div className="z-50 relative">
-          <div className="absolute  bg-background mt-4 right-0">
+        <div className="relative z-50">
+          <div className="absolute  right-0 mt-4 bg-background">
             <PixelBox>
               <button
                 onClick={() => {
@@ -52,7 +52,7 @@ export const ThemeToggler = () => {
                 }}
                 className="w-max"
               >
-                <div className="flex flex-row gap-2 justify-start items-center">
+                <div className="flex flex-row items-center justify-start gap-2">
                   <img
                     src={displayTheme && Icons[displayTheme].dark}
                     alt="dark mode"
@@ -61,7 +61,7 @@ export const ThemeToggler = () => {
                   <span
                     className={`${
                       selectedTheme === 'dark' ? 'underline' : ''
-                    } decoration-tangerine hover:decoration-text hover:underline`}
+                    } decoration-tangerine hover:underline hover:decoration-text`}
                   >
                     dark
                   </span>
@@ -73,7 +73,7 @@ export const ThemeToggler = () => {
                 }}
                 className="w-max"
               >
-                <div className="flex flex-row gap-2 justify-start items-center">
+                <div className="flex flex-row items-center justify-start gap-2">
                   <img
                     src={displayTheme && Icons[displayTheme].light}
                     alt="light mode"
@@ -82,7 +82,7 @@ export const ThemeToggler = () => {
                   <span
                     className={`${
                       selectedTheme === 'light' ? 'underline' : ''
-                    } decoration-tangerine hover:decoration-text hover:underline`}
+                    } decoration-tangerine hover:underline hover:decoration-text`}
                   >
                     light
                   </span>
@@ -94,7 +94,7 @@ export const ThemeToggler = () => {
                 }}
                 className="w-max"
               >
-                <div className="flex flex-row gap-2 justify-start items-center">
+                <div className="flex flex-row items-center justify-start gap-2">
                   <img
                     src={displayTheme && Icons[displayTheme].system}
                     alt="system set"
@@ -103,7 +103,7 @@ export const ThemeToggler = () => {
                   <span
                     className={`${
                       selectedTheme === 'system' ? 'underline' : ''
-                    } decoration-tangerine hover:decoration-text hover:underline`}
+                    } decoration-tangerine hover:underline hover:decoration-text`}
                   >
                     system
                   </span>

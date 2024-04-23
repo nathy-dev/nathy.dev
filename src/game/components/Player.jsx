@@ -35,7 +35,6 @@ const _Player = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const playerControl = useCallback(
     throttle(async (camera, scene, moveForward, moveBackward, moveRight, moveLeft, action) => {
-
       // player position
       const position = playerRef.current.position;
 

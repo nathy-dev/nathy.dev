@@ -32,8 +32,7 @@ const _Enemy = ({ position }) => {
   const [bullets, setBullets] = useState([]);
   const [isAlive, setIsAlive] = useState(true);
   const [baseMaterial, setBaseMaterial] = useState(enemyMaterial);
-;
-  const playDeathSound = useSound(enemyDeathSound, {volume: 0.8, loop: false});
+  const playDeathSound = useSound(enemyDeathSound, { volume: 0.8, loop: false });
 
   let currTime = 0;
   let prevTime = 0;

@@ -11,7 +11,7 @@ type OptionProps = {
 
 const Option = ({ id, children, onClick, checked }: OptionProps) => {
   return (
-    <div className="flex flex-row gap-2 items-center text-left">
+    <div className="flex flex-row items-center gap-2 text-left">
       <input type="checkbox" id={id} className="accent-ghoul" checked={checked} onChange={() => onClick()} />
       <label htmlFor={id}>{children}</label>
     </div>
@@ -22,7 +22,7 @@ export const MuteButton = () => {
   const { isMuted, toggleMute } = useGameStore();
 
   return (
-    <div className="absolute top-2 right-4">
+    <div className="absolute right-4 top-2">
       <PixelBox variant="game">
         <Option id="mute" checked={isMuted} onClick={toggleMute}>
           Mute

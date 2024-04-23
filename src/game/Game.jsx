@@ -23,7 +23,7 @@ export const Game = () => {
   const handleGameStart = () => {
     setGameStarted(true);
     playBallad();
-  }
+  };
 
   useEffect(() => {
     if (mute) {

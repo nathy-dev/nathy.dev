@@ -7,13 +7,13 @@ import { useGameStore } from '../store.ts';
 import { useSound } from '../hooks/useSound.ts';
 
 const _Bullet = ({ position, velocity, name, setBullets, collisionMarker, color }) => {
-  const playFire = useSound(fireSound, {volume: 0.4, loop: false});
+  const playFire = useSound(fireSound, { volume: 0.4, loop: false });
   const ref = useRef();
 
   const { takeDamage } = useGameStore();
 
   useEffect(() => {
-    playFire()
+    playFire();
   }, []);
 
   const bulletControl = useCallback(

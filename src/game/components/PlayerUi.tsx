@@ -6,7 +6,7 @@ export const PlayerUi = () => {
   const { health, shards } = useGameStore();
 
   return (
-    <div className="absolute top-2 left-4">
+    <div className="absolute left-4 top-2">
       <PixelBox variant="game">
         <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-1">
