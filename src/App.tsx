@@ -1,10 +1,11 @@
 import '@fontsource/vt323';
-import { TopBar } from './components/TopBar.tsx';
-import { Content } from './components/Content.tsx';
+
 import { useEffect, useState } from 'react';
 import { Theme, ThemeContext } from './context/ThemeContext.tsx';
-import { GameboyWrapper } from './components/GameboyWrapper.tsx';
-import { Game } from './game/Game.jsx';
+import { Route, Switch } from 'wouter';
+import { Home } from './routes/Home.tsx';
+import { Gamer } from './routes/Gamer.tsx';
+import { NotFound } from './routes/NotFound.tsx';
 
 function App() {
   const [theme, setTheme] = useState<Theme>({
@@ -42,7 +43,22 @@ function App() {
   return (
     <ThemeContext.Provider value={{ ...theme, setTheme }}>
       <div className="h-screen w-full text-text">
-        <Game></Game>
+        {!blockRender && (
+          <>
+            <Switch>
+              <Route path="/">
+                <Home />
+              </Route>
+              <Route path="/gamer">
+                <Gamer />
+              </Route>
+              <Route>
+                <NotFound />
+              </Route>
+            </Switch>
+          </>
+        )}
+
         {/* {!blockRender && (
           <>
             <TopBar />

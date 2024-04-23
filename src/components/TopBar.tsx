@@ -1,9 +1,12 @@
+import { Link } from 'wouter';
 import { ThemeToggler } from './ThemeToggler.tsx';
 
 export const TopBar = () => {
   return (
-    <div className="w-full flex flex-row justify-between items-center  p-4 text-xl sm:text-2xl leading-normal absolute z-50">
-      <h1>nathy.dev</h1>
+    <div className="absolute z-50 flex w-full flex-row  items-center justify-between p-4 text-xl leading-normal sm:text-2xl">
+      <Link href="/">
+        <h1>nathy.dev</h1>
+      </Link>
       <ThemeToggler />
     </div>
   );
