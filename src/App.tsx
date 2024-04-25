@@ -3,9 +3,9 @@ import '@fontsource/vt323';
 import { useEffect, useState } from 'react';
 import { Theme, ThemeContext } from './context/ThemeContext.tsx';
 import { Route, Switch } from 'wouter';
-import { Home } from './routes/Home.tsx';
-import { Gamer } from './routes/Gamer.tsx';
-import { NotFound } from './routes/NotFound.tsx';
+import { Home } from './pages/Home.tsx';
+import { Gamer } from './pages/Gamer.tsx';
+import { NotFound } from './pages/NotFound.tsx';
 
 function App() {
   const [theme, setTheme] = useState<Theme>({
