@@ -9,20 +9,18 @@ type SoundControl = {
 export const useSound = (soundPath: string, { volume, loop }: SoundControl) => {
   const { isMuted } = useGameStore();
 
-  const sound = useMemo(() => {
-    const audio = new Audio(soundPath);
-    audio.volume = volume ?? 1;
-    audio.loop = loop;
-    return audio;
-  }, [soundPath, loop, volume]);
+  const sound = useMemo(() => new Audio(soundPath), [soundPath]);
 
   const playSound = useCallback(() => {
     sound.play();
   }, [sound]);
 
   useEffect(() => {
+    sound.volume = volume ?? 1;
+    sound.loop = loop;
     sound.muted = isMuted;
-  }, [isMuted, sound]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMuted]);
 
   return playSound;
 };
