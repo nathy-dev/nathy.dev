@@ -15,7 +15,7 @@ import { useSound } from './hooks/useSound.ts';
 
 export const Game = () => {
   const [gameStarted, setGameStarted] = useState(false);
-  const playBallad = useSound(ballad, { volume: 1, loop: false });
+  const playBallad = useSound(ballad, { volume: 1, loop: true });
 
   const { mute } = useKeyboardControls();
   const { toggleMute } = useGameStore();
@@ -33,7 +33,7 @@ export const Game = () => {
   }, [mute]);
 
   return (
-    <>
+    <div id="game" className="h-full w-full">
       {!gameStarted ? (
         <TitleScreen onStartClick={() => handleGameStart()} />
       ) : (
@@ -55,6 +55,6 @@ export const Game = () => {
           </Canvas>
         </Suspense>
       )}
-    </>
+    </div>
   );
 };

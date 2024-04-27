@@ -9,6 +9,7 @@ import { mapData } from './mapHelper.js';
 import { Group } from '../components/Group.jsx';
 import { PointLight } from '../components/PointLight.jsx';
 import { Flame } from '../components/Flame.jsx';
+import { Crosshairs } from '../components/Crosshairs.jsx';
 
 const resolveMapTile = (type, x, y, mapData, setCurrentMap) => {
   const key = `${x}-${y}`;
@@ -60,6 +61,7 @@ export const Map = () => {
     <>
       <Group memoizedWalls={memoizedWalls} />
       <Player />
+      <Crosshairs />
       {memoizedMapData}
       <PlaneOb position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} />
       <PlaneOb position={[0, 2, 0]} rotation={[+Math.PI / 2, 0, 0]} />

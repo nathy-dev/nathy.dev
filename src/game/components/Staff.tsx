@@ -7,7 +7,6 @@ export const Staff = () => {
 
   return (
     <div className="h-full w-full">
-      <div className="fixed right-1/2 top-1/2 h-8 w-8 rounded-full border-4 border-ghoul text-ghoul"></div>
       <div className="fixed bottom-0 h-64 w-full flex-row content-center justify-center">
         <div className="[image-rendering: pixelated] h-full w-full flex-col justify-center">
           {isCasting ? (
