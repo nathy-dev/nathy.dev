@@ -1,3 +1,10 @@
-import { GameManager } from '../game/GameManager.jsx';
+import { lazy, Suspense } from 'react';
+import { Loading } from '../game/components/Loading.tsx';
 
-export const ResumeRummager = () => <GameManager />;
+const LazyGame = lazy(() => import('../game/Game.jsx'));
+
+export const ResumeRummager = () => (
+  <Suspense fallback={<Loading />}>
+    <LazyGame />
+  </Suspense>
+);
