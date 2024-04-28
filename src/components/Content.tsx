@@ -16,7 +16,7 @@ export const Content = () => {
               <div className="space-y-2">
                 <h3 className="pt-2">To learn about me, check out my resume</h3>
                 <div className="flex flex-row items-center justify-center gap-1 xs:items-start xs:gap-8 sm:gap-14">
-                  <Choice icon="fight" handleChoiceClick={() => setLocation('/gamer')}>
+                  <Choice icon="fight" handleChoiceClick={() => setLocation('/resume-rummager')}>
                     Fight for it
                   </Choice>
                   <Choice icon="floppy" handleChoiceClick={() => {}}>
