@@ -2,7 +2,7 @@ import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 
 import { Map } from './map/Map.jsx';
-import { UI } from './components/UI.jsx';
+import { UI } from './components/UI.tsx';
 import { Staff } from './components/Staff.tsx';
 import { TitleScreen } from './components/TitleScreen.tsx';
 import { PlayerUi } from './components/PlayerUi.tsx';
@@ -33,31 +33,25 @@ const Game = () => {
 
   return (
     <div className="h-full w-full">
-      {gameStarted ? (
-        <>
-          <UI>
-            <Staff />
-            <PlayerUi />
-            <MuteButton />
-          </UI>
-          <Canvas
-            shadows={{
-              type: 'BasicShadowMap',
-            }}
-            mode="concurrent"
-            camera={{ position: [0, 5, 0], rotation: [0, 3.2, 0] }}
-          >
-            <Map />
-          </Canvas>
-          <Suspense fallback={null}>
-            <LazyAudio volume={1} loop={true} sound={Sound.ballad} audioRef={balladRef} />
-          </Suspense>
-        </>
-      ) : (
-        <>
-          <MuteButton />
-          <TitleScreen onStartClick={() => handleGameStart()} />
-        </>
+      <TitleScreen onStartClick={() => handleGameStart()} gameStarted={gameStarted} />
+      <UI gameStarted={gameStarted}>
+        <Staff />
+        <PlayerUi />
+        <MuteButton />
+      </UI>
+      <Canvas
+        shadows={{
+          type: 'BasicShadowMap',
+        }}
+        mode="concurrent"
+        camera={{ position: [0, 5, 0], rotation: [0, 3.2, 0] }}
+      >
+        <Map />
+      </Canvas>
+      {gameStarted && (
+        <Suspense fallback={null}>
+          <LazyAudio volume={1} loop={true} sound={Sound.ballad} audioRef={balladRef} />
+        </Suspense>
       )}
     </div>
   );

@@ -1,9 +1,11 @@
 import { PixelBox } from '../../components/PixelBox.tsx';
 import { MuteButton } from './MuteButton.tsx';
 
-export const TitleScreen = ({ onStartClick }: { onStartClick: () => void }) => {
+export const TitleScreen = ({ onStartClick, gameStarted }: { onStartClick: () => void; gameStarted: boolean }) => {
   return (
-    <div className="flex h-full w-full flex-col items-center bg-brick bg-repeat text-center">
+    <div
+      className={`flex h-full w-full flex-col items-center bg-brick bg-repeat text-center ${gameStarted ? 'hidden' : ''}`}
+    >
       <MuteButton />
       <div className="flex h-full max-w-xs flex-col items-center justify-center gap-4 md:max-w-lg">
         <PixelBox variant="game">
