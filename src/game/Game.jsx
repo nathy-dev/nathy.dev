@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Loader } from '@react-three/drei';
 
@@ -10,19 +10,19 @@ import { TitleScreen } from './components/TitleScreen.tsx';
 import { MuteButton } from './components/MuteButton.tsx';
 import { useKeyboardControls } from './hooks/useKeyboardControls.ts';
 import { useGameStore } from './store.ts';
-import ballad from './sounds/ballad.mp3';
-import { useSound } from './hooks/useSound.ts';
+import { Sound } from './util/constants.ts';
+
+const LazyAudio = lazy(() => import('./components/Audio.tsx'));
 
 export const Game = () => {
   const [gameStarted, setGameStarted] = useState(false);
-  const playBallad = useSound(ballad, { volume: 1, loop: true });
+  const balladRef = useRef(null);
 
   const { mute } = useKeyboardControls();
   const { toggleMute } = useGameStore();
 
   const handleGameStart = () => {
     setGameStarted(true);
-    playBallad();
   };
 
   useEffect(() => {
@@ -53,6 +53,9 @@ export const Game = () => {
           >
             <Map />
           </Canvas>
+          <Suspense fallback={null}>
+            <LazyAudio volume={1} loop={true} sound={Sound.ballad} audioRef={balladRef} />
+          </Suspense>
         </Suspense>
       )}
     </div>

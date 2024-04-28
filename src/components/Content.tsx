@@ -9,7 +9,7 @@ export const Content = () => {
     <div className="bg-transparent absolute bottom-0 left-0 right-0 top-32 z-10 m-auto h-48 w-64 sm:w-128 xl:left-96 xl:top-0">
       <div className="flex justify-center align-middle">
         <div className="flex flex-row justify-center text-lg md:text-xl">
-          <PixelBox>
+          <PixelBox variant="translucent">
             <div className="flex max-w-7xl flex-col space-y-2 text-center">
               <h2>Hi, I'm nathy (with a short 'a' like nathaniel)</h2>
               <span>I'm an amatuer dad and professional software developer</span>

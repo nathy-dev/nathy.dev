@@ -44,7 +44,7 @@ export const ThemeToggler = () => {
       </button>
       {showModal && (
         <div className="relative z-50">
-          <div className="absolute  right-0 mt-4 bg-background">
+          <div className="absolute  right-0 mt-4">
             <PixelBox>
               <button
                 onClick={() => {
