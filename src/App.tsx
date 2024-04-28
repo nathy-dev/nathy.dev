@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Theme, ThemeContext } from './context/ThemeContext.tsx';
 import { Route, Switch } from 'wouter';
 import { Home } from './pages/Home.tsx';
-import { Gamer } from './pages/Gamer.tsx';
+import { ResumeRummager } from './pages/ResumeRummager.tsx';
 import { NotFound } from './pages/NotFound.tsx';
 
 function App() {
@@ -49,8 +49,8 @@ function App() {
               <Route path="/">
                 <Home />
               </Route>
-              <Route path="/gamer">
-                <Gamer />
+              <Route path="/resume-rummager">
+                <ResumeRummager />
               </Route>
               <Route>
                 <NotFound />
