@@ -58,16 +58,6 @@ function App() {
             </Switch>
           </>
         )}
-
-        {/* {!blockRender && (
-          <>
-            <TopBar />
-            <div className="h-full w-full max-w-[1400px] relative m-auto">
-              <GameboyWrapper />
-              <Content />
-            </div>
-          </>
-        )} */}
       </div>
     </ThemeContext.Provider>
   );
