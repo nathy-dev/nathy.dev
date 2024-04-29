@@ -1,9 +1,19 @@
 import { PixelBox } from '../../components/PixelBox.tsx';
+import { useKeyboardControls } from '../hooks/useKeyboardControls.ts';
 import { useGameStore } from '../store.ts';
 import { MuteButton } from './MuteButton.tsx';
+import { useEffect } from 'react';
 
 export const TitleScreen = () => {
   const { status, updateStatus } = useGameStore();
+  const { start } = useKeyboardControls();
+
+  useEffect(() => {
+    if (start) {
+      updateStatus('play');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [start]);
   return (
     <div
       className={`z-50 flex h-full w-full flex-col items-center bg-brick bg-repeat text-center ${status === 'init' ? '' : 'hidden'}`}
@@ -37,7 +47,7 @@ export const TitleScreen = () => {
         </PixelBox>
         <button onClick={() => updateStatus('play')}>
           <PixelBox variant="game">
-            <div>Start game</div>
+            <div>Start game (enter)</div>
           </PixelBox>
         </button>
       </div>
