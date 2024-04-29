@@ -11,13 +11,22 @@ import { Sound } from './util/constants.ts';
 import { useKeyboardControls } from './hooks/useKeyboardControls.ts';
 import { useGameStore } from './store.ts';
 import { VictoryOverlay } from './components/VictoryOverlay.tsx';
+import { useRoute } from 'wouter';
 
 const LazyAudio = lazy(() => import('./components/Audio.tsx'));
 
 const Game = () => {
   const { mute } = useKeyboardControls();
-  const { toggleMute, status } = useGameStore();
+  const { toggleMute, status, resetState } = useGameStore();
   const balladRef = useRef(null);
+
+  const [match] = useRoute('/resume-rummager');
+
+  useEffect(() => {
+    if (match) {
+      resetState();
+    }
+  }, []);
 
   useEffect(() => {
     if (mute) {
