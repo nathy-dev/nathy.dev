@@ -1,10 +1,12 @@
 import { PixelBox } from '../../components/PixelBox.tsx';
+import { useGameStore } from '../store.ts';
 import { MuteButton } from './MuteButton.tsx';
 
-export const TitleScreen = ({ onStartClick, gameStarted }: { onStartClick: () => void; gameStarted: boolean }) => {
+export const TitleScreen = () => {
+  const { status, updateStatus } = useGameStore();
   return (
     <div
-      className={`flex h-full w-full flex-col items-center bg-brick bg-repeat text-center ${gameStarted ? 'hidden' : ''}`}
+      className={`z-50 flex h-full w-full flex-col items-center bg-brick bg-repeat text-center ${status === 'init' ? '' : 'hidden'}`}
     >
       <MuteButton />
       <div className="flex h-full max-w-xs flex-col items-center justify-center gap-4 md:max-w-lg">
@@ -27,14 +29,13 @@ export const TitleScreen = ({ onStartClick, gameStarted }: { onStartClick: () =>
                 <li>D - Move right</li>
                 <li>SAPCE - Cast fireball</li>
                 <li>M - Mute sound</li>
-                <li>N - Pause Game</li>
                 <li>Mouse - Rotate camera</li>
                 <li>ESC - End pointerlock</li>
               </ul>
             </div>
           </div>
         </PixelBox>
-        <button onClick={() => onStartClick()}>
+        <button onClick={() => updateStatus('play')}>
           <PixelBox variant="game">
             <div>Start game</div>
           </PixelBox>

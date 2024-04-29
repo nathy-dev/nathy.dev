@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 type Movement = 'moveForward' | 'moveBackward' | 'moveLeft' | 'moveRight' | 'action';
-type SpecialKey = 'KeyW' | 'KeyS' | 'KeyA' | 'KeyA' | 'KeyD' | 'Space' | 'KeyN' | 'KeyM';
+type SpecialKey = 'KeyW' | 'KeyS' | 'KeyA' | 'KeyA' | 'KeyD' | 'Space' | 'KeyN' | 'KeyM' | 'KeyN';
 type MovementMap = {
   moveForward: number;
   moveBackward: number;

@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import { Suspense, lazy, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 
 import { Map } from './map/Map.jsx';
@@ -10,19 +10,14 @@ import { MuteButton } from './components/MuteButton.tsx';
 import { Sound } from './util/constants.ts';
 import { useKeyboardControls } from './hooks/useKeyboardControls.ts';
 import { useGameStore } from './store.ts';
+import { VictoryOverlay } from './components/VictoryOverlay.tsx';
 
 const LazyAudio = lazy(() => import('./components/Audio.tsx'));
 
 const Game = () => {
-  const [gameStarted, setGameStarted] = useState(false);
-
   const { mute } = useKeyboardControls();
-  const { toggleMute } = useGameStore();
+  const { toggleMute, status } = useGameStore();
   const balladRef = useRef(null);
-
-  const handleGameStart = () => {
-    setGameStarted(true);
-  };
 
   useEffect(() => {
     if (mute) {
@@ -32,12 +27,13 @@ const Game = () => {
   }, [mute]);
 
   return (
-    <div className="h-full w-full">
-      <TitleScreen onStartClick={() => handleGameStart()} gameStarted={gameStarted} />
-      <UI gameStarted={gameStarted}>
+    <div className="absolute h-full w-full overflow-hidden">
+      <TitleScreen />
+      <UI>
         <Staff />
         <PlayerUi />
         <MuteButton />
+        <VictoryOverlay condition={status === 'victory'}>You win</VictoryOverlay>
       </UI>
       <Canvas
         shadows={{
@@ -48,7 +44,7 @@ const Game = () => {
       >
         <Map />
       </Canvas>
-      {gameStarted && (
+      {status !== 'init' && (
         <Suspense fallback={null}>
           <LazyAudio volume={1} loop={true} sound={Sound.ballad} audioRef={balladRef} />
         </Suspense>
