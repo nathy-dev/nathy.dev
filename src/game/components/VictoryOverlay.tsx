@@ -1,9 +1,17 @@
+import { useEffect } from 'react';
 import { Choice } from '../../components/Choice.tsx';
 import { PixelBox } from '../../components/PixelBox.tsx';
 import { useGameStore } from '../store.ts';
 
-export const VictoryOverlay = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const VictoryOverlay = ({ controlRef }: { controlRef: React.RefObject<any> }) => {
   const { status } = useGameStore();
+
+  useEffect(() => {
+    if (status === 'victory') {
+      controlRef.current.unlock();
+    }
+  });
 
   if (status !== 'victory') return null;
 

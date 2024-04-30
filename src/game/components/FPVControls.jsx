@@ -1,18 +1,22 @@
-import React, { useEffect, useRef } from 'react';
-import { useThree } from '@react-three/fiber';
-import { PointerLockControls } from '@react-three/drei';
+import React, { useEffect } from 'react';
+import { extend, useThree } from '@react-three/fiber';
+import { useGameStore } from '../store.ts';
+import { PointerLockControls } from 'three-stdlib';
 
-const _FPVControls = () => {
+extend({ PointerLockControls });
+const _FPVControls = ({ controlRef }) => {
   const { camera, gl } = useThree();
-  const controls = useRef();
+  const { status } = useGameStore();
 
   useEffect(() => {
     document.addEventListener('click', () => {
-      controls.current.lock();
+      if (status === 'play') {
+        controlRef.current.lock();
+      }
     });
-  }, []);
+  }, [status, controlRef]);
 
-  return <PointerLockControls ref={controls} args={[camera, gl.domElement]} />;
+  return <pointerLockControls ref={controlRef} args={[camera, gl.domElement]} pointerSpeed={0.5} />;
 };
 
-export const FPVControls = React.memo(_FPVControls);
+export const FPVControls = React.memo(_FPVControls, (prev, next) => prev.controlRef === next.controlRef);

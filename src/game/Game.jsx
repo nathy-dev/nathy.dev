@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 
 import { Map } from './map/Map.jsx';
 import { UI } from './components/UI.tsx';
+import { FPVControls } from './components/FPVControls.jsx';
 import { Staff } from './components/Staff.tsx';
 import { TitleScreen } from './components/TitleScreen.tsx';
 import { PlayerUi } from './components/PlayerUi.tsx';
@@ -19,6 +20,7 @@ const Game = () => {
   const { mute } = useKeyboardControls();
   const { toggleMute, status, resetState } = useGameStore();
   const balladRef = useRef(null);
+  const FPVref = useRef(null);
 
   const [match] = useRoute('/resume-rummager');
 
@@ -37,12 +39,12 @@ const Game = () => {
 
   return (
     <div className="absolute h-full w-full overflow-hidden">
-      <TitleScreen />
+      <TitleScreen controlRef={FPVref} />
       <UI>
         <Staff />
         <PlayerUi />
         <MuteButton />
-        <VictoryOverlay />
+        <VictoryOverlay controlRef={FPVref} />
       </UI>
       <Canvas
         shadows={{
@@ -52,6 +54,7 @@ const Game = () => {
         camera={{ position: [0, 5, 0], rotation: [0, 3.2, 0] }}
       >
         <Map />
+        <FPVControls controlRef={FPVref} />
       </Canvas>
       {status !== 'init' && (
         <Suspense fallback={null}>

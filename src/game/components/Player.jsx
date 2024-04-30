@@ -3,7 +3,6 @@ import { useFrame } from '@react-three/fiber';
 import { throttle } from '../util/throttle.ts';
 import { Vector3 } from 'three';
 
-import { FPVControls } from './FPVControls.jsx';
 import { useKeyboardControls } from '../hooks/useKeyboardControls.ts';
 import { Bullet } from './Bullet.jsx';
 import { calcDistance, closestObject } from '../physics/calcDistance.ts';
@@ -216,7 +215,6 @@ const _Player = () => {
 
   return (
     <>
-      <FPVControls />
       <mesh ref={playerRef} position={[2, 0.5, 2]} name="player" />
       <pointLight ref={torchRef} intensity={30} castShadow={false} color={0xbe7bf9} decay={3} />
       {bullets.map((bullet) => {

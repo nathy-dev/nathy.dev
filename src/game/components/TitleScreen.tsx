@@ -4,7 +4,8 @@ import { useKeyboardControls } from '../hooks/useKeyboardControls.ts';
 import { useGameStore } from '../store.ts';
 import { useEffect } from 'react';
 
-export const TitleScreen = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const TitleScreen = ({ controlRef }: { controlRef: React.RefObject<any> }) => {
   const { status, updateStatus } = useGameStore();
   const { start } = useKeyboardControls();
 
@@ -46,7 +47,12 @@ export const TitleScreen = () => {
               </div>
             </div>
           </PixelBox>
-          <button onClick={() => updateStatus('play')}>
+          <button
+            onClick={() => {
+              controlRef.current.lock();
+              updateStatus('play');
+            }}
+          >
             <PixelBox>
               <div>Start game (enter)</div>
             </PixelBox>

@@ -285,7 +285,7 @@ const _Enemy = ({ position }) => {
         }
       }
     }, 10),
-    [isAlive],
+    [isAlive, status],
   );
 
   useFrame(({ scene, camera, clock }) => enemyControl(scene, camera, clock));
