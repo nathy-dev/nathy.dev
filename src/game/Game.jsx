@@ -42,7 +42,7 @@ const Game = () => {
         <Staff />
         <PlayerUi />
         <MuteButton />
-        <VictoryOverlay condition={status === 'victory'}>You win</VictoryOverlay>
+        <VictoryOverlay />
       </UI>
       <Canvas
         shadows={{

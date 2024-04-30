@@ -1,16 +1,29 @@
+import { Choice } from '../../components/Choice.tsx';
 import { PixelBox } from '../../components/PixelBox.tsx';
+import { useGameStore } from '../store.ts';
 
-type OverlayProps = {
-  children: React.ReactNode;
-  condition: boolean;
-};
+export const VictoryOverlay = () => {
+  const { status } = useGameStore();
 
-export const VictoryOverlay = ({ children, condition }: OverlayProps) => {
+  if (status !== 'victory') return null;
+
   return (
-    <div
-      className={`w-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform ${condition ? '' : 'hidden'}`}
-    >
-      <PixelBox>{children}</PixelBox>
+    <div className={`w-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform`}>
+      <PixelBox>
+        <div className="flex flex-col items-center gap-8">
+          <h1 className="flex flex-row gap-4 text-xl">
+            <img src="./resume.png" alt="resume-collected" /> Resume Rummaged!
+            <img src="./resume.png" alt="resume-collected" />
+          </h1>
+          <div className="flex flex-col items-center">
+            <p>You collected all the shards and repaired the resume, well done!</p>
+            <p>You've earned this download link fair and square:</p>
+          </div>
+          <Choice icon="floppy" handleChoiceClick={() => {}}>
+            Open treasure?
+          </Choice>
+        </div>
+      </PixelBox>
     </div>
   );
 };

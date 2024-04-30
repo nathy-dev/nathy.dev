@@ -12,6 +12,7 @@ import { imgLoader } from '../util/textures.ts';
 import deadEnemyImg from '../images/enemy_death.gif';
 import enemyDeathSound from '../sounds/enemy-death.wav';
 import { useSound } from '../hooks/useSound.ts';
+import { useGameStore } from '../store.ts';
 
 const ENEMY_SPEED = 0.025;
 const ENEMY_CHASE_SPEED = 0.0075;
@@ -34,6 +35,8 @@ const _Enemy = ({ position }) => {
   const [baseMaterial, setBaseMaterial] = useState(enemyMaterial);
   const playDeathSound = useSound(enemyDeathSound, { volume: 0.8, loop: false });
 
+  const { status } = useGameStore();
+
   let currTime = 0;
   let prevTime = 0;
 
@@ -41,6 +44,9 @@ const _Enemy = ({ position }) => {
 
   const enemyControl = useCallback(
     throttle(async (scene, camera, clock) => {
+      if (status !== 'play') {
+        return;
+      }
       const enemyPosition = ref.current?.position;
       const playerPosition = scene.children[1].position;
 

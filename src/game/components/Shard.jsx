@@ -9,7 +9,7 @@ import { useGameStore } from '../store.ts';
 import { useSound } from '../hooks/useSound.ts';
 
 const _Shard = ({ initialPosition }) => {
-  const { collectShard } = useGameStore();
+  const { collectShard, shards, updateStatus } = useGameStore();
   const [collected, setCollected] = useState(false);
   const ref = useRef();
 
@@ -29,6 +29,7 @@ const _Shard = ({ initialPosition }) => {
           y: initialPosition[1],
           z: initialPosition[2],
         }) < 1;
+      ``;
 
       if (collision && !collected) {
         playShardCollect();
@@ -37,8 +38,12 @@ const _Shard = ({ initialPosition }) => {
         setCollected(true);
         collectShard();
       }
+
+      if (shards === 5) {
+        updateStatus('victory');
+      }
     }, 100),
-    [collected],
+    [collected, shards],
   );
 
   useFrame(({ scene, camera }) => shardControl(scene, camera));
