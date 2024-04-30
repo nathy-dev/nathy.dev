@@ -5,7 +5,7 @@ type State = {
   health: number;
   shards: number;
   isMuted: boolean;
-  status: 'init' | 'victory' | 'play';
+  status: 'init' | 'victory' | 'play' | 'gameover';
 };
 
 type Action = {

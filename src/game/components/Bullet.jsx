@@ -10,7 +10,7 @@ const _Bullet = ({ position, velocity, name, setBullets, collisionMarker, color 
   const playFire = useSound(fireSound, { volume: 0.4, loop: false });
   const ref = useRef();
 
-  const { takeDamage } = useGameStore();
+  const { takeDamage, health, updateStatus } = useGameStore();
 
   useEffect(() => {
     playFire();
@@ -34,11 +34,15 @@ const _Bullet = ({ position, velocity, name, setBullets, collisionMarker, color 
           .forEach((_collision) => {
             takeDamage();
           });
+
+        if (health <= 1) {
+          updateStatus('gameover');
+        }
       } else {
         ref?.current?.position.set(velocity[0] + position?.x, velocity[1] + position?.y, velocity[2] + position?.z);
       }
     }, 10),
-    [],
+    [health],
   );
 
   useFrame(({ scene }) => bulletControl(scene));

@@ -17,7 +17,7 @@ export const VictoryOverlay = ({ controlRef }: { controlRef: React.RefObject<any
 
   return (
     <div className={`w-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform`}>
-      <PixelBox>
+      <PixelBox variant="game">
         <div className="flex flex-col items-center gap-8">
           <h1 className="flex flex-row gap-4 text-xl">
             <img src="./resume.png" alt="resume-collected" /> Resume Rummaged!

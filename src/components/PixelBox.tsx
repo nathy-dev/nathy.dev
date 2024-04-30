@@ -17,7 +17,7 @@ export const PixelBox = ({ children, variant }: PixelBoxProps) => {
       return (
         <div>
           <div className="border-b-4 border-t-4 border-ghoul">
-            <div className="-mx-1 border-l-4 border-r-4 border-ghoul bg-ink text-ghoul">
+            <div className="-mx-1 border-l-4 border-r-4 border-ghoul bg-background text-text">
               <div className="p-4">{children}</div>
             </div>
           </div>

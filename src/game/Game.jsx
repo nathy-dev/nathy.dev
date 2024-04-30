@@ -12,6 +12,8 @@ import { Sound } from './util/constants.ts';
 import { useKeyboardControls } from './hooks/useKeyboardControls.ts';
 import { useGameStore } from './store.ts';
 import { VictoryOverlay } from './components/VictoryOverlay.tsx';
+import { DeathOverlay } from './components/DeathOverlay.tsx';
+
 import { useRoute } from 'wouter';
 
 const LazyAudio = lazy(() => import('./components/Audio.tsx'));
@@ -45,6 +47,7 @@ const Game = () => {
         <PlayerUi />
         <MuteButton />
         <VictoryOverlay controlRef={FPVref} />
+        <DeathOverlay controlRef={FPVref} />
       </UI>
       <Canvas
         shadows={{
