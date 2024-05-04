@@ -49,8 +49,8 @@ export const TitleScreen = ({ controlRef }: { controlRef: React.RefObject<any> }
           </PixelBox>
           <button
             onClick={() => {
-              controlRef.current.lock();
               updateStatus('play');
+              controlRef.current.lock();
             }}
           >
             <PixelBox>

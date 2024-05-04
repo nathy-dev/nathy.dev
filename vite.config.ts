@@ -7,4 +7,7 @@ export default defineConfig({
   esbuild: {
     drop: ['console'],
   },
+  server: {
+    open: true,
+  },
 });

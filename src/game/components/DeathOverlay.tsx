@@ -28,7 +28,7 @@ export const DeathOverlay = ({ controlRef }: { controlRef: React.RefObject<any> 
           <div className="flex flex-col items-center">
             <p>Oof those skeletons pack a punch! Better luck next time.</p>
           </div>
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row gap-8">
             <Choice
               icon="floppy"
               handleChoiceClick={() => {
