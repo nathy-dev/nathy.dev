@@ -6,7 +6,7 @@ export const Content = () => {
   const [_, setLocation] = useLocation();
 
   return (
-    <div className="bg-transparent absolute bottom-0 left-0 right-0 top-32 z-10 m-auto h-48 w-64 sm:w-128 xl:left-96 xl:top-0">
+    <div className="absolute bottom-0 left-0 right-0 top-32 z-10 m-auto h-48 w-64 sm:w-128 xl:left-96 xl:top-0">
       <div className="flex justify-center align-middle">
         <div className="flex flex-row justify-center text-lg md:text-xl">
           <PixelBox variant="translucent">
