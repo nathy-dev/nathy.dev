@@ -16,7 +16,7 @@ export const VictoryOverlay = ({ controlRef }: { controlRef: React.RefObject<any
   if (status !== 'victory') return null;
 
   return (
-    <div className={`w-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform`}>
+    <div className={`w-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-center`}>
       <PixelBox variant="game">
         <div className="flex flex-col items-center gap-8">
           <h1 className="flex flex-row gap-4 text-xl">
@@ -27,7 +27,7 @@ export const VictoryOverlay = ({ controlRef }: { controlRef: React.RefObject<any
             <p>You collected all the shards and repaired the resume, well done!</p>
             <p>You've earned this download link fair and square:</p>
           </div>
-          <Choice icon="floppy" handleChoiceClick={() => {}}>
+          <Choice icon="chest" handleChoiceClick={() => {}}>
             Open treasure?
           </Choice>
         </div>

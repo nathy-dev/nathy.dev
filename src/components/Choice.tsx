@@ -4,7 +4,7 @@ import { PixelBox } from './PixelBox.tsx';
 
 type ChoiceProps = {
   children: string;
-  icon: 'fight' | 'floppy';
+  icon: 'fight' | 'floppy' | 'chest' | 'retry' | 'exit';
   handleChoiceClick: () => void;
 };
 
