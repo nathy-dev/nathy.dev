@@ -5,9 +5,12 @@ import { calcDistance } from '../physics/calcDistance.ts';
 import fireSound from '../sounds/fire.mp3';
 import { useGameStore } from '../store.ts';
 import { useSound } from '../hooks/useSound.ts';
+import playerDamageSound from '../sounds/playerDamage.wav';
 
 const _Bullet = ({ position, velocity, name, setBullets, collisionMarker, color }) => {
   const playFire = useSound(fireSound, { volume: 0.4, loop: false });
+  const playDeathSound = useSound(playerDamageSound, { volume: 0.8, loop: false });
+
   const ref = useRef();
 
   const { takeDamage, health, updateStatus } = useGameStore();
@@ -33,6 +36,7 @@ const _Bullet = ({ position, velocity, name, setBullets, collisionMarker, color 
           .filter((collision) => collision.name === 'player')
           .forEach((_collision) => {
             takeDamage();
+            playDeathSound();
           });
 
         if (health <= 1) {

@@ -17,7 +17,7 @@ import { useGameStore } from '../store.ts';
 const ENEMY_SPEED = 0.025;
 const ENEMY_CHASE_SPEED = 0.0075;
 const ENEMY_BULLET_SPEED = 0.075;
-const ENEMY_ATTACK_INTERVAL = 1000;
+const ENEMY_ATTACK_INTERVAL = 2000;
 const ENEMY_AGGRO_AREA = 15;
 const WORLD_COLLISION_MARGIN = 2;
 const TOP_LEFT_BOUNDARY = -9999;
