@@ -27,7 +27,12 @@ export const VictoryOverlay = ({ controlRef }: { controlRef: React.RefObject<any
             <p>You collected all the shards and repaired the resume, well done!</p>
             <p>You've earned this download link fair and square:</p>
           </div>
-          <Choice icon="chest" handleChoiceClick={() => {}}>
+          <Choice
+            icon="chest"
+            handleChoiceClick={() => {
+              window.open('resume.pdf', '_blank');
+            }}
+          >
             Open treasure?
           </Choice>
         </div>
