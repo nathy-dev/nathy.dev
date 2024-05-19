@@ -16,7 +16,7 @@ export const Content = () => {
         <>
           <BottomBar setShowContent={setShowContent} showContent={showContent} />
           {showContent && (
-            <div className="absolute bottom-0 left-0 right-0 top-0 z-10 m-auto h-48 w-64">
+            <div className="absolute bottom-48 left-0 right-0 top-0 z-10 m-auto h-48 w-64">
               <div className="flex justify-center align-middle">
                 <div className="flex flex-row justify-center text-lg md:text-xl">
                   <PixelBox>

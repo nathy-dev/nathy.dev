@@ -18,6 +18,7 @@ import { useRoute } from 'wouter';
 import { useDetectMobile } from '../hooks/useDetectMobile.ts';
 import { PixelBox } from '../components/PixelBox.tsx';
 import { Choice } from '../components/Choice.tsx';
+import { TopBar } from '../components/TopBar.tsx';
 
 const LazyAudio = lazy(() => import('./components/Audio.tsx'));
 
@@ -46,26 +47,29 @@ const Game = () => {
   return (
     <div className="absolute h-full w-full overflow-hidden">
       {isMobile ? (
-        <div className="absolute bottom-0 left-0 right-0 top-0 m-auto h-fit w-fit">
-          <PixelBox>
-            <div className="flex flex-col items-center gap-8">
-              <h1>Mobile game coming soon</h1>
-              <div>
-                <p>To play, visit again on a desktop.</p>
-                <p>Here is the reward for free.</p>
-              </div>
+        <>
+          <TopBar />
+          <div className="absolute bottom-0 left-0 right-0 top-0 m-auto h-fit w-fit">
+            <PixelBox>
+              <div className="flex flex-col items-center gap-8">
+                <h1>Mobile game coming soon</h1>
+                <div>
+                  <p>To play, visit again on a desktop.</p>
+                  <p>Here is the reward for free.</p>
+                </div>
 
-              <Choice
-                icon="chest"
-                handleChoiceClick={() => {
-                  window.open('resume.pdf', '_blank');
-                }}
-              >
-                Open treasure?
-              </Choice>
-            </div>
-          </PixelBox>
-        </div>
+                <Choice
+                  icon="chest"
+                  handleChoiceClick={() => {
+                    window.open('resume.pdf', '_blank');
+                  }}
+                >
+                  Open treasure?
+                </Choice>
+              </div>
+            </PixelBox>
+          </div>
+        </>
       ) : (
         <>
           <TitleScreen controlRef={FPVref} />
