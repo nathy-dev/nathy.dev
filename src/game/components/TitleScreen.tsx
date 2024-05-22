@@ -44,6 +44,7 @@ export const TitleScreen = ({ controlRef }: { controlRef: React.RefObject<any> }
                   <li>Mouse - Rotate camera</li>
                   <li>ESC - End pointerlock</li>
                 </ul>
+                <p className="text-l italic">Touch not yet supported, keyboard required</p>
               </div>
             </div>
           </PixelBox>
