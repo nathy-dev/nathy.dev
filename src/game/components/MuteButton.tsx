@@ -25,7 +25,7 @@ export const MuteButton = () => {
     <div className="absolute right-4 top-2">
       <PixelBox variant="game">
         <Option id="mute" checked={isMuted} onClick={toggleMute}>
-          Mute
+          Mute (M)
         </Option>
       </PixelBox>
     </div>

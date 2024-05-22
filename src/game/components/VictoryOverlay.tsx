@@ -2,10 +2,12 @@ import { useEffect } from 'react';
 import { Choice } from '../../components/Choice.tsx';
 import { PixelBox } from '../../components/PixelBox.tsx';
 import { useGameStore } from '../store.ts';
+import { useLocation } from 'wouter';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const VictoryOverlay = ({ controlRef }: { controlRef: React.RefObject<any> }) => {
-  const { status } = useGameStore();
+  const { status, resetState } = useGameStore();
+  const [_, setLocation] = useLocation();
 
   useEffect(() => {
     if (status === 'victory') {
@@ -27,14 +29,25 @@ export const VictoryOverlay = ({ controlRef }: { controlRef: React.RefObject<any
             <p>You collected all the shards and repaired the resume, well done!</p>
             <p>You've earned this download link fair and square:</p>
           </div>
-          <Choice
-            icon="chest"
-            handleChoiceClick={() => {
-              window.open('resume.pdf', '_blank');
-            }}
-          >
-            Open treasure?
-          </Choice>
+          <div className="flex flex-row gap-16">
+            <Choice
+              icon="chest"
+              handleChoiceClick={() => {
+                window.open('resume.pdf', '_blank');
+              }}
+            >
+              Open treasure?
+            </Choice>
+            <Choice
+              icon="exit"
+              handleChoiceClick={() => {
+                setLocation('/');
+                resetState();
+              }}
+            >
+              Exit game
+            </Choice>
+          </div>
         </div>
       </PixelBox>
     </div>
